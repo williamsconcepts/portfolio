@@ -32,7 +32,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
             <>
               <span>·</span>
               <div className="flex gap-1.5">
-                {post.tags.map((tag) => (
+                {post.tags.map((tag: string) => (
                   <span key={tag} className="font-mono bg-card border border-border px-2 py-0.5 rounded text-xs">{tag}</span>
                 ))}
               </div>
