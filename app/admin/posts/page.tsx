@@ -1,10 +1,10 @@
 // app/admin/posts/page.tsx
-import type { Post } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from "react";
 
 export default async function AdminPostsPage() {
-  const posts: Post[] = await prisma.post.findMany({
+  const posts = await prisma.post.findMany({
     orderBy: { updatedAt: "desc" },
   });
 
@@ -29,7 +29,7 @@ export default async function AdminPostsPage() {
         </div>
       ) : (
         <div className="space-y-2">
-          {posts.map((p) => (
+          {posts.map((p: { id: Key | null | undefined; title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; slug: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; updatedAt: string | number | Date; published: any; }) => (
             <Link
               key={p.id}
               href={`/admin/posts/${p.id}`}
