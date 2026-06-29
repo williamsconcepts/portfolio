@@ -26,7 +26,7 @@ export default async function HomePage() {
           Chidiebube
         </h1>
         <p className="text-xl text-muted max-w-xl leading-relaxed mb-8">
-          Web developer focused on building fast, accessible, and beautiful digital experiences.
+         A Web developer focused on building fast, accessible, and beautiful digital experiences.
           I write about what I learn along the way.
         </p>
         <div className="flex flex-wrap gap-3">

@@ -7,8 +7,22 @@ export const metadata = {
   description: "Web development projects I've built.",
 };
 
+type Project = {
+  id: string;
+  slug: string;
+  emoji?: string;
+  repo?: string;
+  url?: string;
+  title: string;
+  description: string;
+  tags: string[];
+  featured: boolean;
+  order: number;
+  createdAt: Date;
+};
+
 export default async function ProjectsPage() {
-  const projects = await prisma.project.findMany({
+  const projects: Project[] = await prisma.project.findMany({
     orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
   });
 
@@ -44,7 +58,7 @@ export default async function ProjectsPage() {
               <p className="text-sm text-muted leading-relaxed flex-1 mb-4">{p.description}</p>
               {p.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5">
-                  {p.tags.map((tag) => (
+                  {p.tags.map((tag: string) => (
                     <span key={tag} className="text-xs font-mono bg-paper border border-border px-2 py-0.5 rounded">{tag}</span>
                   ))}
                 </div>
