@@ -1,10 +1,20 @@
-# Portfolio — Next.js
+# Portfolio — Next.js + PostgreSQL
 
-A clean, fast portfolio site with a projects section and blog. Built with Next.js 14, TypeScript, and Tailwind CSS.
+A full-stack portfolio with a blog and projects section. Built with Next.js 14, Prisma, PostgreSQL, TypeScript, and Tailwind CSS.
 
 ---
 
-## Getting Started
+## Stack
+
+- **Next.js 14** (App Router)
+- **PostgreSQL** via **Prisma ORM**
+- **JWT auth** (via `jose`) with httpOnly cookies
+- **Markdown** content rendered server-side
+- **Tailwind CSS**
+
+---
+
+## Quick Start
 
 ### 1. Install dependencies
 
@@ -12,126 +22,148 @@ A clean, fast portfolio site with a projects section and blog. Built with Next.j
 npm install
 ```
 
-### 2. Start the development server
+### 2. Set up environment variables
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local`:
+
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/portfolio"
+JWT_SECRET="run: openssl rand -base64 32"
+```
+
+### 3. Set up the database
+
+```bash
+# Push the schema to your database
+npm run db:push
+
+# (Optional) Seed with a sample admin user and data
+npx ts-node prisma/seed.ts
+```
+
+Default seed credentials: `admin@example.com` / `changeme123`
+**Change the password immediately after first login** (via Prisma Studio or `db:studio`).
+
+### 4. Start development
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000)
+Admin panel: [http://localhost:3000/admin](http://localhost:3000/admin)
 
 ---
 
-## Personalizing the Site
+## Database Options
 
-### Boobae & links
+Any PostgreSQL-compatible service works:
 
-Edit these files to update Boobae, tagline, and social links:
-
-| File | What to change |
-|---|---|
-| `app/layout.tsx` | Site title and meta description |
-| `app/page.tsx` | Hero headline, tagline, CTA text |
-| `components/Footer.tsx` | GitHub, Twitter, and email links |
-| `components/Navbar.tsx` | Logo/domain text (e.g. `boobae.dev`) |
-
----
-
-## Adding Projects
-
-Create a `.json` file in `data/projects/` for each project:
-
-```json
-{
-  "title": "My App",
-  "description": "A short description of what it does and why you built it.",
-  "emoji": "🚀",
-  "url": "https://myapp.com",
-  "repo": "https://github.com/yourusername/myapp",
-  "tags": ["Next.js", "TypeScript", "Tailwind"],
-  "featured": true
-}
-```
-
-**Fields:**
-
-| Field | Required | Description |
+| Service | Free tier | Notes |
 |---|---|---|
-| `title` | ✅ | Project name |
-| `description` | ✅ | One or two sentences |
-| `emoji` | | Displayed as the project icon |
-| `url` | | Link to the live site |
-| `repo` | | Link to the source code |
-| `tags` | | Array of tech stack tags |
-| `featured` | | Set to `true` to sort it first |
+| **Supabase** | ✅ 500MB | Easiest setup, good dashboard |
+| **Neon** | ✅ 3GB | Serverless, great for Vercel |
+| **Railway** | ✅ $5 credit | Simple UI |
+| **Local** | ✅ | `brew install postgresql` |
 
 ---
 
-## Writing Blog Posts
+## Admin Panel
 
-Create a `.md` file in `data/posts/`. The filename becomes the URL slug.
+Go to `/admin/login` to sign in.
 
-```markdown
----
-title: "My First Post"
-date: "2024-07-01"
-excerpt: "A short summary shown in the listing."
-tags: ["Next.js", "CSS"]
----
-
-Your post content here, in **Markdown**.
-
-## Headings, lists, code blocks — all supported.
-```
-
-**Frontmatter fields:**
-
-| Field | Description |
+| Page | URL |
 |---|---|
-| `title` | Post title (required) |
-| `date` | Publication date in `YYYY-MM-DD` format |
-| `excerpt` | Short summary shown on the blog listing |
-| `tags` | Array of tag strings |
+| Dashboard | `/admin` |
+| Posts list | `/admin/posts` |
+| New post | `/admin/posts/new` |
+| Edit post | `/admin/posts/[id]` |
+| Projects list | `/admin/projects` |
+| New project | `/admin/projects/new` |
+| Edit project | `/admin/projects/[id]` |
 
 ---
 
-## Deployment
+## Writing Posts
 
-### Vercel (recommended)
+Posts are written in the admin UI using **Markdown**. Supported syntax:
 
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com) → New Project → Import your repo
-3. Click Deploy — it's automatic from there
+- `# H1`, `## H2`, `### H3` headings
+- `**bold**`, `*italic*`
+- `` `inline code` `` and fenced code blocks
+- `- unordered` and `1. ordered` lists
+- `> blockquotes`
+- `[links](url)` and `![images](url)`
 
-### Other platforms
+Posts can be saved as **drafts** (not visible on site) or **published** (live immediately).
+
+---
+
+## API Reference
+
+All write endpoints require a valid session cookie (set on login).
+
+### Auth
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/login` | Sign in `{ email, password }` |
+| POST | `/api/auth/logout` | Sign out |
+| GET | `/api/auth/me` | Current user |
+
+### Posts
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/posts` | All published posts |
+| GET | `/api/posts?all=true` | All posts incl. drafts (auth) |
+| POST | `/api/posts` | Create post (auth) |
+| GET | `/api/posts/[id]` | Get post by id or slug |
+| PATCH | `/api/posts/[id]` | Update post (auth) |
+| DELETE | `/api/posts/[id]` | Delete post (auth) |
+
+### Projects
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/projects` | All projects |
+| POST | `/api/projects` | Create project (auth) |
+| GET | `/api/projects/[id]` | Get project by id or slug |
+| PATCH | `/api/projects/[id]` | Update project (auth) |
+| DELETE | `/api/projects/[id]` | Delete project (auth) |
+
+---
+
+## Deployment (Vercel + Neon)
+
+1. Create a Postgres database on [Neon](https://neon.tech) (free)
+2. Copy the connection string
+3. Push to GitHub
+4. Import the repo to [Vercel](https://vercel.com)
+5. Add environment variables in Vercel dashboard:
+   - `DATABASE_URL` — from Neon
+   - `JWT_SECRET` — `openssl rand -base64 32`
+6. Add to Vercel build command: `prisma generate && next build`
+7. After first deploy, run migrations: `npx prisma db push` locally against the Neon URL
+
+---
+
+## Personalizing
+
+Search and replace `Your Name` and `yourname.dev` across:
+- `app/layout.tsx` — site title
+- `app/page.tsx` — hero text
+- `components/Navbar.tsx` — logo
+- `components/Footer.tsx` — social links
+
+---
+
+## Database Scripts
 
 ```bash
-npm run build
-npm start
-```
-
----
-
-## Project Structure
-
-```
-portfolio/
-├── app/
-│   ├── page.tsx          # Home page
-│   ├── projects/
-│   │   └── page.tsx      # Projects listing
-│   └── blog/
-│       ├── page.tsx      # Blog listing
-│       └── [slug]/
-│           └── page.tsx  # Individual post
-├── components/
-│   ├── Navbar.tsx
-│   └── Footer.tsx
-├── lib/
-│   ├── posts.ts          # Blog post helpers
-│   └── projects.ts       # Project helpers
-├── data/
-│   ├── posts/            # ← Add .md files here
-│   └── projects/         # ← Add .json files here
-└── tailwind.config.js
+npm run db:generate   # Regenerate Prisma client after schema changes
+npm run db:push       # Push schema to database (no migration files)
+npm run db:migrate    # Create and apply a named migration
+npm run db:studio     # Open Prisma Studio (visual DB editor)
 ```
