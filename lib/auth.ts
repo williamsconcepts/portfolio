@@ -24,7 +24,7 @@ export async function verifyToken(token: string) {
 }
 
 export async function getSession() {
-  const token = cookies().get("session")?.value;
+  const token = (await cookies()).get("session")?.value;
   if (!token) return null;
   return verifyToken(token);
 }

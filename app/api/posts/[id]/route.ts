@@ -5,16 +5,18 @@ import { getSession } from "@/lib/auth";
 import { slugify } from "@/lib/markdown";
 
 // GET /api/posts/:id — public (by slug or id)
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const post = await prisma.post.findFirst({
-    where: { OR: [{ id: params.id }, { slug: params.id }], published: true },
+    where: { OR: [{ id }, { slug: id }], published: true },
   });
   if (!post) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(post);
 }
 
 // PATCH /api/posts/:id — update (admin only)
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
@@ -33,7 +35,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     if (tags !== undefined) data.tags = tags;
     if (published !== undefined) data.published = published;
 
-    const post = await prisma.post.update({ where: { id: params.id }, data });
+    const post = await prisma.post.update({ where: { id }, data });
     return NextResponse.json(post);
   } catch (err) {
     console.error(err);
@@ -42,10 +44,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 }
 
 // DELETE /api/posts/:id — delete (admin only)
-export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  await prisma.post.delete({ where: { id: params.id } });
+  await prisma.post.delete({ where: { id } });
   return NextResponse.json({ ok: true });
 }

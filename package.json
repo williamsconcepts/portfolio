@@ -17,6 +17,7 @@
     "@neondatabase/serverless": "^1.1.0",
     "@prisma/client": "^5.14.0",
     "bcryptjs": "^2.4.3",
+    "gray-matter": "^4.0.3",
     "jose": "^5.4.0",
     "next": "16.2.9",
     "react": "^18",
