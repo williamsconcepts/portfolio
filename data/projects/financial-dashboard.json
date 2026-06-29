@@ -1,0 +1,9 @@
+{
+  "title": "Financial-dashboard",
+  "description": "Built a financial dashboard that has: A public home page. A login page. Dashboard pages that are protected by authentication. The ability for users to add, edit, and delete invoices. The dashboard will also have an accompanying database",
+  "emoji": "🔖💰",
+  "url": "https://nextjs-dashboard-tau-nine-9fb628braw.vercel.app/dashboard",
+  "repo": "https://github.com/williamsconcepts/nextjs-dashboard",
+  "tags": ["Next.js", "Postgres", "TypeScript"],
+  "featured": true
+}
