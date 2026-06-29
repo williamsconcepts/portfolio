@@ -151,7 +151,7 @@ All write endpoints require a valid session cookie (set on login).
 
 ## Personalizing
 
-Search and replace `Your Name` and `yourname.dev` across:
+Search and replace `boobae` and `boobae.dev` across:
 - `app/layout.tsx` — site title
 - `app/page.tsx` — hero text
 - `components/Navbar.tsx` — logo

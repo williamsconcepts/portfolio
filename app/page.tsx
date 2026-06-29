@@ -23,7 +23,7 @@ export default async function HomePage() {
       <section className="mb-20">
         <p className="font-mono text-accent text-sm mb-4 tracking-wide">Hi, I&apos;m</p>
         <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-ink mb-6 leading-tight">
-          Your Name
+          boobae
         </h1>
         <p className="text-xl text-muted max-w-xl leading-relaxed mb-8">
           Web developer focused on building fast, accessible, and beautiful digital experiences.

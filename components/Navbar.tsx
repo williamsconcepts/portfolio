@@ -16,7 +16,7 @@ export default function Navbar() {
       <nav className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="font-mono font-medium text-ink hover:text-accent transition-colors">
-          yourname<span className="text-accent">.</span>dev
+          boobae<span className="text-accent">.</span>dev
         </Link>
 
         {/* Nav links */}

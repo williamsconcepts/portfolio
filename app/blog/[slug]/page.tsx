@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await prisma.post.findUnique({ where: { slug: params.slug, published: true } });
   if (!post) return {};
-  return { title: `${post.title} — Your Name`, description: post.excerpt };
+  return { title: `${post.title} — boobae`, description: post.excerpt };
 }
 
 export default async function PostPage({ params }: { params: { slug: string } }) {

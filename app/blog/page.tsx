@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Blog — Your Name",
+  title: "Blog — boobae",
   description: "Thoughts on web development, tooling, and the craft of building things.",
 };
 

@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Projects — Your Name",
+  title: "Projects — boobae",
   description: "Web development projects I've built.",
 };
 
