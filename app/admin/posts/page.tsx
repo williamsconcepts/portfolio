@@ -1,9 +1,10 @@
 // app/admin/posts/page.tsx
+import type { Post } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
 export default async function AdminPostsPage() {
-  const posts = await prisma.post.findMany({
+  const posts: Post[] = await prisma.post.findMany({
     orderBy: { updatedAt: "desc" },
   });
 
