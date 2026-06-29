@@ -10,9 +10,9 @@ export const metadata = {
 type Project = {
   id: string;
   slug: string;
-  emoji?: string;
-  repo?: string;
-  url?: string;
+  emoji?: string | null;
+  repo?: string | null;
+  url?: string | null;
   title: string;
   description: string;
   tags: string[];

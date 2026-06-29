@@ -6,7 +6,7 @@ interface Project {
   id: string;
   title: string;
   description: string;
-  emoji: string;
+  emoji?: string | null;
   featured: boolean;
   tags: string[];
 }
