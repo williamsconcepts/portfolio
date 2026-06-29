@@ -2,8 +2,17 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
-export default async function AdminProjectsPage() {
-  const projects = await prisma.project.findMany({
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  emoji: string;
+  featured: boolean;
+  tags: string[];
+}
+
+export default async function AdminProjectsPage(): Promise<JSX.Element> {
+  const projects: Project[] = await prisma.project.findMany({
     orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
   });
 
@@ -28,7 +37,7 @@ export default async function AdminProjectsPage() {
         </div>
       ) : (
         <div className="space-y-2">
-          {projects.map((p) => (
+          {projects.map((p: Project) => (
             <Link
               key={p.id}
               href={`/admin/projects/${p.id}`}
