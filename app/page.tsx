@@ -23,7 +23,7 @@ export default async function HomePage() {
       <section className="mb-20">
         <p className="font-mono text-accent text-sm mb-4 tracking-wide">Hi, I&apos;m</p>
         <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-ink mb-6 leading-tight">
-          boobae
+          Chidiebube
         </h1>
         <p className="text-xl text-muted max-w-xl leading-relaxed mb-8">
           Web developer focused on building fast, accessible, and beautiful digital experiences.
@@ -51,7 +51,7 @@ export default async function HomePage() {
           </div>
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p) => (
+            {projects.map((p: typeof projects[number]) => (
               <Link key={p.id} href={`/projects#${p.slug}`} className="group block bg-card hover:bg-border/60 border border-border rounded-xl p-5 transition-colors">
                 <div className="flex items-start justify-between mb-3">
                   <span className="text-2xl">{p.emoji || "🔧"}</span>
@@ -61,7 +61,7 @@ export default async function HomePage() {
                 <p className="text-sm text-muted line-clamp-2">{p.description}</p>
                 {p.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-3">
-                    {p.tags.slice(0, 3).map((tag) => (
+                    {p.tags.slice(0, 3).map((tag: string) => (
                       <span key={tag} className="text-xs font-mono bg-paper border border-border px-2 py-0.5 rounded">{tag}</span>
                     ))}
                   </div>
@@ -84,7 +84,7 @@ export default async function HomePage() {
           </div>
         ) : (
           <div className="divide-y divide-border">
-            {posts.map((post) => (
+            {posts.map((post: typeof posts[number]) => (
               <Link key={post.id} href={`/blog/${post.slug}`} className="group flex items-start justify-between gap-4 py-5 hover:bg-card -mx-4 px-4 rounded-lg transition-colors">
                 <div>
                   <h3 className="font-semibold text-ink group-hover:text-accent transition-colors mb-1">{post.title}</h3>
