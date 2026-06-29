@@ -9,13 +9,13 @@ export default async function AdminDashboard() {
     prisma.project.count(),
   ]);
 
-  const recentPosts = await prisma.post.findMany({
+  const recentPosts: Array<{ id: string; title: string; published: boolean; updatedAt: Date }> = await prisma.post.findMany({
     orderBy: { updatedAt: "desc" },
     take: 5,
     select: { id: true, title: true, published: true, updatedAt: true },
   });
 
-  const recentProjects = await prisma.project.findMany({
+  const recentProjects: Array<{ id: string; title: string; emoji: string | null; updatedAt: Date }> = await prisma.project.findMany({
     orderBy: { updatedAt: "desc" },
     take: 5,
     select: { id: true, title: true, emoji: true, updatedAt: true },
