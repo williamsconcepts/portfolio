@@ -29,7 +29,7 @@ export default async function BlogPage() {
         </div>
       ) : (
         <div className="divide-y divide-border">
-          {posts.map((post) => (
+          {posts.map((post: (typeof posts)[number]) => (
             <Link key={post.id} href={`/blog/${post.slug}`} className="group block py-7 -mx-4 px-4 hover:bg-card rounded-xl transition-colors">
               <div className="flex items-start justify-between gap-6">
                 <div className="flex-1 min-w-0">
@@ -37,7 +37,7 @@ export default async function BlogPage() {
                   {post.excerpt && <p className="text-muted text-sm leading-relaxed line-clamp-2">{post.excerpt}</p>}
                   {post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 mt-3">
-                      {post.tags.map((tag) => (
+                      {post.tags.map((tag: string) => (
                         <span key={tag} className="text-xs font-mono bg-paper border border-border px-2 py-0.5 rounded">{tag}</span>
                       ))}
                     </div>
