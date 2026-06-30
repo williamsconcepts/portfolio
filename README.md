@@ -1,6 +1,6 @@
 # Portfolio — Next.js + PostgreSQL
 
-A full-stack portfolio with a blog and projects section. Built with Next.js 14, Prisma, PostgreSQL, TypeScript, and Tailwind CSS.
+A full-stack portfolio with a blog and projects section. Built with Next.js 16, Prisma, PostgreSQL, TypeScript, and Tailwind CSS.
 
 ---
 
