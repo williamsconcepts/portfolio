@@ -226,6 +226,18 @@ export default function About() {
                     <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
                       {experience.role}
                     </Text>
+                    {experience.link && (
+                      <Text variant="body-default-s" marginBottom="m">
+                        <a
+                          href={experience.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{ color: "var(--neutral-on-background-strong)", textDecoration: "underline" }}
+                        >
+                          View project
+                        </a>
+                      </Text>
+                    )}
                     <Column as="ul" gap="16">
                       {experience.achievements.map(
                         (achievement: React.ReactNode, index: number) => (

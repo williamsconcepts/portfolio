@@ -61,7 +61,7 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building your idea with code</>,
+  headline: <>Building my ideas with code</>,
   featured: {
     display: true,
     title: (
@@ -115,6 +115,7 @@ const about: About = {
         company: "Maintx360",
         timeframe: "2026",
         role: "CMMS Platform",
+        link: "https://maintx360.netlify.app/",
         achievements: [
           <>
             Designed a maintenance management system for oil and gas operations, centralizing asset
@@ -134,10 +135,56 @@ const about: About = {
           },
         ],
       },
+        {
+        company: "FastPizza",
+        timeframe: "2026",
+        role: "Pizza Ordering API",
+        link: "https://react-pizza-api.netlify.app/",
+        achievements: [
+          <>
+            Designed a dynamic pizza menu application built using React. It allows users to browse through a diverse selection of pizzas, view detailed information about each item, and manage their orders.
+          </>,
+          <>
+           The application aims to enhance user experience by implementing features such as filtering options, a responsive layout, and interactive components.
+          </>,
+        ],
+        images: [
+          {
+            src: "/images/projects/project-01/fast1.png",
+            alt: "FastPizza project preview",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+      {
+        company: "Draw-On-It",
+        timeframe: "2026",
+        role: "Drawing Application",
+        link: "https://draw-on-html-canvas.netlify.app/",
+        achievements: [
+          <>
+           Draw-On-It is a creative drawing application built with HTML5 Canvas. It offers a full-screen drawing surface where users can sketch freely with dynamic, hue-based colors that cycle smoothly across the color spectrum.
+          </>,
+          <>
+           The experience is designed to feel expressive and interactive, with smooth strokes, responsive behavior, and automatic saving so artwork persists across refreshes.
+          </>,
+        ],
+        images: [
+          {
+            src: "/images/projects/project-01/canvas.png",
+            alt: "Draw-On-It project preview",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+
       {
         company: "OilOps360",
         timeframe: "2026",
         role: "Operations Compliance Platform",
+        link: "https://oilop360.netlify.app/",
         achievements: [
           <>
             Created a compliance-focused web app for managing contractor records, inspections, and
@@ -161,6 +208,7 @@ const about: About = {
         company: "Community Library",
         timeframe: "2026",
         role: "Frontend Library Manager",
+        link: "https://kommunitylibrary.netlify.app/",
         achievements: [
           <>
             Built a browser-based library management system using HTML, CSS, and JavaScript with
