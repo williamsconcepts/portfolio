@@ -317,6 +317,18 @@ export default function About() {
                     <Text variant="body-default-m" onBackground="neutral-weak">
                       {skill.description}
                     </Text>
+                    {skill.link && (
+                      <Text variant="body-default-s" marginTop="8">
+                        <a
+                          href={skill.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{ color: "var(--neutral-on-background-strong)", textDecoration: "underline" }}
+                        >
+                          View projects
+                        </a>
+                      </Text>
+                    )}
                     {skill.tags && skill.tags.length > 0 && (
                       <Row wrap gap="8" paddingTop="8">
                         {skill.tags.map((tag, tagIndex) => (

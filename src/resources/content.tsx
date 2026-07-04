@@ -236,16 +236,9 @@ const about: About = {
     institutions: [
        {
         name: "Cyphercresent Limited",
-        description: <>Studied Entrepreneurship.</>,
+        description: <>Studied Entrepreneurship || software engineering || UI/UX design</>,  
       },
-      {
-        name: "Cyphercresent Limited",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Cyphercresent Limited",
-        description: <>Studied UI/UX design.</>,
-      },
+    
     ],
   },
   technical: {
@@ -253,10 +246,12 @@ const about: About = {
     title: "Technical skills",
     skills: [
       {
+        
         title: "Figma",
         description: (
           <>Able to prototype in Figma with unnatural speed.</>
         ),
+        link: "https://www.figma.com/@chidiekwebelam",
         tags: [
           {
             name: "Figma",
@@ -266,6 +261,7 @@ const about: About = {
         // optional: leave the array empty if you don't want to display images
         images: [
           {
+            
             src: "/images/projects/project-01/ui1.png",
             alt: "Project image",
             width: 16,
