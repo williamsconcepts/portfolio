@@ -42,9 +42,9 @@ const social: Social = [
     essential: false,
   },
   {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@abume",
+    name: "X",
+    icon: "twitter",
+    link: "https://www.x.com/@williamschuddy",
     essential: true,
   },
   {
@@ -77,8 +77,7 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm {person.firstName}, a {person.role.toLowerCase()} at{" "}
-      <Text as="span" size="xl" weight="strong">Host2uls</Text>, where I craft intuitive <br /> user experiences.
+      I'm {person.firstName}, a {person.role.toLowerCase()}, Welcome to where I craft intuitive <br /> user experiences.
     </>
   ),
 };
@@ -97,7 +96,7 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://cal.com/ekwebelam-williams-2zxckt/15min",
   },
   intro: {
     display: true,
@@ -238,6 +237,35 @@ const about: About = {
           },
         ],
       },
+       {
+        title: "JavaScript",
+        description: (
+          <>A digital operations compliance platform for the oil and gas industry that centralizes contractor compliance, asset inspections, and record recovery workflows.</>
+        ),
+        tags: [
+          {
+            name: "JavaScript",
+            icon: "javascript",
+          },
+          {
+            name: "HTML",
+            icon: "html",
+          },
+          {
+            name: "CSS",
+            icon: "css",
+          },
+        ],
+        // optional: leave the array empty if you don't want to display images
+        images: [
+          {
+            src: "/images/projects/project-01/oilops2.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
       {
         title: "Next.js",
         description: (
@@ -261,6 +289,100 @@ const about: About = {
         images: [
           {
             src: "/images/projects/project-01/acme.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+       {
+        title: "React.js",
+        description: (
+          <>Building A modern React pizza ordering experience built with Tailwind CSS</>
+        ),
+        tags: [
+          {
+            name: "JavaScript",
+            icon: "javascript",
+          },
+          {
+            name: "React.js",
+            icon: "react",
+          },
+          {
+            name: "Tailwind CSS",
+            icon: "tailwind",
+          },
+        ],
+        // optional: leave the array empty if you don't want to display images
+        images: [
+          {
+            src: "/images/projects/project-01/fast1.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+  
+    ],
+  },
+
+  certifications: {
+    display: true, // set to false to hide this section
+    title: "Certifications",
+    skills: [
+      {
+        title: "Software Engineering",
+        description: (
+          <>Founded a strong foundation in software engineering principles, web development, and user experience design.</>
+        ),
+        tags: [
+          {
+            name: "HTML",
+            icon: "html",
+          },
+          {
+            name: "CSS",
+            icon: "css",
+          },
+          {
+            name: "JavaScript",
+            icon: "javascript",
+          },
+          {
+            name: "Express.js",
+            icon: "express",
+          },
+          {
+            name: "Node.js",
+            icon: "nodejs",
+          },
+          {
+            name: "Next.js",
+            icon: "nextjs",
+          },
+          {
+            name: "UI/UX Design",
+            icon: "figma",
+          },
+        ],
+        // optional: leave the array empty if you don't want to display images
+        images: [
+          {
+            src: "/images/projects/project-01/cert1.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-01/cert2.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-01/cert3.png",
             alt: "Project image",
             width: 16,
             height: 9,
