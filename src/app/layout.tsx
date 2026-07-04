@@ -135,7 +135,7 @@ export default async function RootLayout({
               dots={{
                 display: effects.dots.display,
                 opacity: effects.dots.opacity as opacity,
-                size: effects.dots.size as SpacingToken,
+                size: effects.dots.size as unknown as SpacingToken,
                 color: effects.dots.color,
               }}
               grid={{
@@ -148,9 +148,6 @@ export default async function RootLayout({
               lines={{
                 display: effects.lines.display,
                 opacity: effects.lines.opacity as opacity,
-                size: effects.lines.size as SpacingToken,
-                thickness: effects.lines.thickness,
-                angle: effects.lines.angle,
                 color: effects.lines.color,
               }}
             />
