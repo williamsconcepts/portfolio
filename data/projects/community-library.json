@@ -1,8 +1,0 @@
-{
-  "title": "Community Library",
-  "description": "A simple frontend-based library management system built with HTML, CSS, and JavaScript. This project demonstrates Object-Oriented Programming (OOP), DOM manipulation, event handling, and browser localStorage persistence. The application allows users to manage books and members, borrow and return books, and view library statistics directly from the browser.",
-  "emoji": "📚",
-  "url": "https://kommunitylibrary.netlify.app/",
-  "repo": "https://github.com/williamsconcepts/community-library",
-  "tags": ["HTML5", "CSS3", "JavaScript"]
-}

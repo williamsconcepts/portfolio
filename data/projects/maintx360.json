@@ -1,8 +1,0 @@
-{
-  "title": "MainTx360",
-  "description": "Maintx360 is a web-based Computerized Maintenance Management System (CMMS) designed to help oil and gas companies manage equipment maintenance activities, work orders, technicians, and maintenance records in a centralized digital platform.",
-  "emoji": "🛢",
-  "url": "https://maintx360.netlify.app/",
-  "repo": "https://github.com/williamsconcepts/MaintX360",
-  "tags": ["HTML", "CSS3", "Vanilla JavaScript"]
-}
