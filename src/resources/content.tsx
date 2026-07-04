@@ -406,21 +406,12 @@ const about: About = {
             name: "Next.js",
             icon: "nextjs",
           },
-          {
-            name: "UI/UX Design",
-            icon: "figma",
-          },
+      
         ],
         // optional: leave the array empty if you don't want to display images
         images: [
           {
             src: "/images/projects/project-01/cert1.png",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cert2.png",
             alt: "Project image",
             width: 16,
             height: 9,
@@ -433,6 +424,30 @@ const about: About = {
           },
         ],
       },
+        {
+        title: "UI/UX Design",
+        description: (
+          <>Founded a strong foundation in user interface and user experience design principles, development, and design thinking.</>
+        ),
+        tags: [
+        
+          {
+            name: "UI/UX Design",
+            icon: "figma",
+          },
+        ],
+        // optional: leave the array empty if you don't want to display images
+        images: [
+          {
+            src: "/images/projects/project-01/cert2.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          
+        ],
+      },
+        
     ],
   },
 };
