@@ -1,6 +1,6 @@
 # Portfolio
 
-This repository contains a personal portfolio website built with Next.js and TypeScript. It showcases projects, blog posts, and a gallery of work.
+This repository contains a personal portfolio  website built with Next.js and TypeScript. It showcases projects, blog posts, and a gallery of work.
 
 ## Features
 
