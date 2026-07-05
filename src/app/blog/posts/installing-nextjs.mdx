@@ -1,0 +1,308 @@
+---
+title: "Installing Next.js"
+summary: "Learn how to install Next.js, migrate an existing React project, create your first page, and start the development server."
+
+publishedAt: "2026-07-05"
+tag: "Next.js"
+---
+
+Now that you've built a simple React application, it's time to move to **Next.js**. While React focuses on building user interfaces, Next.js provides the tools and architecture needed to create complete, production-ready web applications.
+
+In this guide, you'll install Next.js, migrate your React application, and create your very first Next.js page.
+
+## Prerequisites
+
+Before installing Next.js, make sure you have **Node.js 20.9 or later** installed on your computer.
+
+You can verify your installed version by running:
+
+```bash
+node -v
+```
+
+If Node.js isn't installed or your version is outdated, download the latest **LTS** version from the official Node.js website.
+
+## Creating a `package.json` File
+
+Every Node.js project starts with a `package.json` file.
+
+Create one in the root of your project:
+
+```json
+{}
+```
+
+This file stores information about your project, including its dependencies and scripts.
+
+## Installing Next.js
+
+Open your terminal in the project directory and install the required packages.
+
+```bash
+npm install react@latest react-dom@latest next@latest
+```
+
+This command installs:
+
+- **React** – the core UI library.
+- **React DOM** – renders React components in the browser.
+- **Next.js** – the framework that powers your application.
+
+After installation, your `package.json` will look similar to this:
+
+```json
+{
+  "dependencies": {
+    "next": "^14.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
+```
+
+> **Note:** Your installed versions may be newer than those shown above. As long as `next`, `react`, and `react-dom` are installed, you're ready to continue.
+
+You'll also notice a new file named:
+
+```text
+package-lock.json
+```
+
+This file records the exact dependency versions installed in your project, ensuring consistent installations across different environments.
+
+## Cleaning Up the React Project
+
+Because Next.js manages much of the setup automatically, several parts of the original React project are no longer needed.
+
+You can safely remove:
+
+- The `<html>` and `<body>` tags.
+- The `<div id="app"></div>` root element.
+- The React and ReactDOM CDN script tags.
+- The Babel script.
+- The `<script type="text/jsx">` wrapper.
+- `document.getElementById()`.
+- `ReactDOM.createRoot()`.
+- The `React.` prefix from `React.useState()`.
+
+Next.js handles all of these behind the scenes.
+
+## Importing React Hooks
+
+Instead of accessing hooks through the global `React` object, import them directly.
+
+```jsx
+import { useState } from "react";
+```
+
+This is the standard approach used in React and Next.js projects.
+
+## Your Migrated React Component
+
+After removing the unnecessary HTML and scripts, your code becomes much cleaner.
+
+```jsx
+import { useState } from "react";
+
+function Header({ title }) {
+  return <h1>{title ? title : "Default title"}</h1>;
+}
+
+function HomePage() {
+  const names = [
+    "Ada Lovelace",
+    "Grace Hopper",
+    "Margaret Hamilton",
+  ];
+
+  const [likes, setLikes] = useState(0);
+
+  function handleClick() {
+    setLikes(likes + 1);
+  }
+
+  return (
+    <div>
+      <Header title="Develop. Preview. Ship." />
+
+      <ul>
+        {names.map((name) => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
+
+      <button onClick={handleClick}>
+        Like ({likes})
+      </button>
+    </div>
+  );
+}
+```
+
+Notice how much simpler the file is.
+
+All that's left is your React code—no HTML wrapper, no Babel configuration, and no manual DOM rendering.
+
+## Renaming the File
+
+Since the file now contains only JavaScript and JSX, rename it from:
+
+```text
+index.html
+```
+
+to either:
+
+```text
+index.js
+```
+
+or
+
+```text
+index.jsx
+```
+
+In Next.js, you'll soon rename it again as part of the App Router structure.
+
+## Creating Your First Next.js Page
+
+Next.js uses **file-based routing**.
+
+Instead of defining routes with JavaScript, pages are created using folders and filenames.
+
+Create the following structure:
+
+```text
+app/
+└── page.js
+```
+
+Move your React component into `page.js`.
+
+Then export it as the default component.
+
+```jsx
+import { useState } from "react";
+
+function Header({ title }) {
+  return <h1>{title ? title : "Default title"}</h1>;
+}
+
+export default function HomePage() {
+  // Component code...
+}
+```
+
+Next.js automatically treats `page.js` as the page displayed at the root route (`/`).
+
+## Adding a Development Script
+
+To start your Next.js application easily, add a script to your `package.json`.
+
+```json
+{
+  "scripts": {
+    "dev": "next dev"
+  },
+
+  "dependencies": {
+    "next": "^14.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
+```
+
+Now you can launch the development server with:
+
+```bash
+npm run dev
+```
+
+By default, your application will be available at:
+
+```text
+http://localhost:3000
+```
+
+## The First Error You'll Encounter
+
+After running the development server, you'll likely see an error similar to:
+
+```text
+You're importing a component that needs useState.
+It only works in a Client Component...
+```
+
+Although it might seem alarming, this is expected.
+
+The reason is that Next.js uses **React Server Components** by default.
+
+Server Components cannot use client-side hooks like:
+
+- `useState`
+- `useEffect`
+- `useRef`
+
+Components that need these features must be marked as **Client Components**.
+
+You'll learn how to do that in the next chapter.
+
+## The Automatically Generated `layout.js`
+
+When you start the development server, Next.js automatically creates another file:
+
+```text
+app/
+├── layout.js
+└── page.js
+```
+
+The `layout.js` file defines the shared layout for your application.
+
+A typical layout looks like this:
+
+```jsx
+export const metadata = {
+  title: "Next.js",
+  description: "Generated by Next.js",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+This layout wraps every page in your application and is commonly used for shared elements like:
+
+- Navigation bars
+- Footers
+- Sidebars
+- Global styles
+- Metadata
+
+## Benefits of Migrating to Next.js
+
+Even after this first migration, several improvements become apparent.
+
+You've already:
+
+- Removed React and Babel CDN scripts.
+- Eliminated manual DOM rendering.
+- Simplified your project structure.
+- Created your first file-based route.
+- Begun using Next.js conventions.
+- Gained automatic compilation without configuring Babel yourself.
+
+As your application grows, Next.js continues to provide features such as routing, server rendering, image optimization, API routes, and excellent developer tooling.
+
+## Conclusion
+
+Installing Next.js transforms your React project into a fully featured application framework. By replacing manual setup with built-in conventions, Next.js reduces configuration and lets you focus on building your application.
+
+Although you'll encounter your first Server Component error during this migration, it's an important introduction to one of Next.js's most powerful features. In the next chapter, you'll learn the difference between **Server Components** and **Client Components**, and how to decide which one to use.
