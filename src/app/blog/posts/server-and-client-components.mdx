@@ -1,0 +1,337 @@
+---
+title: "Understanding Server and Client Components in Next.js"
+summary: "Learn the difference between Server and Client Components, understand the server-client boundary, and discover how to build interactive applications using the 'use client' directive."
+image: "/images/gallery/learn-client-and-server-environments.avif"
+publishedAt: "2026-07-05"
+tag: "Next.js"
+---
+
+One of the biggest differences between React and Next.js is the introduction of **Server Components** and **Client Components**. These concepts help developers build faster applications by deciding **where** different parts of the UI should be rendered.
+
+Before understanding these components, it's important to understand the two environments that every web application runs in: the **server** and the **client**.
+
+## Understanding the Server and Client
+
+Every web application involves communication between two environments.
+
+### The Client
+
+The **client** is the user's web browser.
+
+Its responsibilities include:
+
+- Sending requests to the server.
+- Displaying the user interface.
+- Responding to user interactions.
+- Updating the DOM.
+- Running JavaScript in the browser.
+
+Anything involving clicks, typing, animations, or browser APIs happens on the client.
+
+### The Server
+
+The **server** is a computer that hosts your application.
+
+It is responsible for:
+
+- Receiving requests.
+- Fetching data.
+- Running backend logic.
+- Rendering components.
+- Returning responses to the browser.
+
+Because servers typically have more computing power than client devices, they're ideal for handling expensive operations before sending the final result to the browser.
+
+## Why Split the Work?
+
+Not every task belongs in the browser.
+
+For example:
+
+**Better suited for the server**
+
+- Fetching data from databases
+- Calling external APIs
+- Reading files
+- Authentication
+- Rendering static content
+
+**Better suited for the client**
+
+- Button clicks
+- Forms
+- Animations
+- Modal windows
+- State management
+- Browser APIs
+
+By moving appropriate work to the server, Next.js sends less JavaScript to the browser, improving both performance and loading speed.
+
+## The Network Boundary
+
+The **network boundary** is the conceptual line separating server-side code from client-side code.
+
+```text
+Server
+│
+│  (Network Boundary)
+│
+Client
+```
+
+React allows developers to choose where this boundary exists within the component tree.
+
+For example:
+
+```text
+HomePage
+├── Header (Server Component)
+├── Posts (Server Component)
+└── LikeButton (Client Component)
+```
+
+Here:
+
+- The server fetches and renders the posts.
+- The browser handles the interactive Like button.
+
+Each component runs where it makes the most sense.
+
+## How Next.js Organizes Components
+
+Behind the scenes, Next.js creates two separate module graphs.
+
+### Server Module Graph
+
+Contains components rendered on the server.
+
+Examples include:
+
+- Pages
+- Layouts
+- Data fetching components
+
+### Client Module Graph
+
+Contains components that run in the browser.
+
+Examples include:
+
+- Buttons
+- Forms
+- Dropdown menus
+- Interactive widgets
+
+Keeping these graphs separate helps reduce the amount of JavaScript sent to the client.
+
+## The React Server Component Payload
+
+When a page is rendered, Next.js sends a special response known as the **React Server Component Payload (RSC Payload)**.
+
+This payload contains:
+
+- The rendered output of Server Components.
+- Placeholders for Client Components.
+- References to the JavaScript files required by Client Components.
+
+Once the browser receives this payload, React combines everything together and hydrates the interactive parts of the page.
+
+This process allows applications to load quickly while still supporting rich interactivity.
+
+## Why `useState` Causes an Error
+
+When you migrated your React application to Next.js, you likely encountered an error similar to:
+
+```text
+You're importing a component that needs useState.
+It only works in a Client Component...
+```
+
+This happens because **Server Components cannot use React Hooks** such as:
+
+- `useState`
+- `useEffect`
+- `useReducer`
+- `useRef`
+
+These hooks depend on browser behavior and therefore must run on the client.
+
+## Creating a Client Component
+
+To fix the error, move the interactive button into its own component.
+
+Create a new file:
+
+```text
+app/
+├── like-button.js
+└── page.js
+```
+
+Start with a simple component.
+
+```jsx
+export default function LikeButton() {
+
+}
+```
+
+Next, move the button and click handler into it.
+
+```jsx
+export default function LikeButton() {
+  function handleClick() {
+    setLikes(likes + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Like ({likes})
+    </button>
+  );
+}
+```
+
+Since the component uses state, import the `useState` hook.
+
+```jsx
+import { useState } from "react";
+
+export default function LikeButton() {
+  const [likes, setLikes] = useState(0);
+
+  function handleClick() {
+    setLikes(likes + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Like ({likes})
+    </button>
+  );
+}
+```
+
+At this point, the component still won't work because Next.js treats it as a Server Component.
+
+## Using the `"use client"` Directive
+
+To tell Next.js that a component should run in the browser, add the following directive at the very top of the file.
+
+```jsx
+"use client";
+
+import { useState } from "react";
+
+export default function LikeButton() {
+  const [likes, setLikes] = useState(0);
+
+  function handleClick() {
+    setLikes(likes + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Like ({likes})
+    </button>
+  );
+}
+```
+
+The `"use client"` directive marks the entire file as a **Client Component**.
+
+Only components that require browser features should include this directive.
+
+## Updating `page.js`
+
+Now import the new component into your page.
+
+```jsx
+import LikeButton from "./like-button";
+
+function Header({ title }) {
+  return <h1>{title ? title : "Default title"}</h1>;
+}
+
+export default function HomePage() {
+  const names = [
+    "Ada Lovelace",
+    "Grace Hopper",
+    "Margaret Hamilton",
+  ];
+
+  return (
+    <div>
+      <Header title="Develop. Preview. Ship." />
+
+      <ul>
+        {names.map((name) => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
+
+      <LikeButton />
+    </div>
+  );
+}
+```
+
+The page itself remains a Server Component, while only the Like button runs in the browser.
+
+This is one of the biggest advantages of the App Router.
+
+## Your Final Project Structure
+
+After moving the interactive logic, your application should look like this:
+
+```text
+app/
+├── layout.js
+├── page.js
+└── like-button.js
+```
+
+This structure separates server-rendered content from client-side interactivity, making your application more efficient and easier to maintain.
+
+## Fast Refresh
+
+After saving your changes, you may notice the browser updates instantly without requiring a manual refresh.
+
+This feature is called **Fast Refresh**.
+
+Fast Refresh automatically updates your application while preserving component state whenever possible, making development significantly faster.
+
+It comes built into Next.js with no additional configuration required.
+
+## When Should You Use Client Components?
+
+Use **Server Components** by default.
+
+Only use **Client Components** when your component needs browser-specific features such as:
+
+- `useState`
+- `useEffect`
+- Event handlers (`onClick`, `onChange`, etc.)
+- Browser APIs (`window`, `document`, `localStorage`)
+- Interactive forms
+- Animations
+
+Everything else should generally remain a Server Component for better performance.
+
+## Server Components vs. Client Components
+
+| Server Components | Client Components |
+|-------------------|------------------|
+| Render on the server | Render in the browser |
+| Faster initial load | Support interactivity |
+| Can fetch data directly | Can use React Hooks |
+| Cannot use `useState` or `useEffect` | Can use all client-side React features |
+| Smaller JavaScript bundle | Sends JavaScript to the browser |
+
+The goal isn't to choose one over the other—it's to use each where it makes the most sense.
+
+## Conclusion
+
+Server and Client Components are one of the defining features of modern Next.js applications. By rendering most of your UI on the server and limiting client-side JavaScript to interactive components, Next.js delivers faster, more efficient applications without sacrificing the rich user experiences developers expect from React.
+
+As you continue learning Next.js, you'll see how these two component types work together to build scalable, high-performance web applications.
