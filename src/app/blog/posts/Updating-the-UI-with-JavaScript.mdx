@@ -1,0 +1,131 @@
+---
+title: "Updating the UI with JavaScript"
+summary: "Learn how to use JavaScript and the DOM to dynamically update a webpage, understand the difference between HTML and the DOM, and explore why declarative libraries like React simplify UI development."
+image: "/images/gallery/learn-dom-and-source.avif"
+publishedAt: "2026-07-05"
+tag: "JavaScript"
+---
+
+When building web applications, HTML provides the initial structure of a page. However, JavaScript allows us to modify that structure after the page has loaded by interacting with the **Document Object Model (DOM)**.
+
+In this article, we'll create a simple webpage and use JavaScript to dynamically add content to it.
+
+## Setting Up the HTML
+
+Start by creating an `index.html` file with a single `div` element that will act as the root of our application.
+
+```html
+<html>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+```
+
+Notice that the `div` has an `id` of `app`. This makes it easy to locate later using JavaScript.
+
+Next, add a `<script>` tag before the closing `body` tag.
+
+```html
+<html>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/javascript"></script>
+  </body>
+</html>
+```
+
+Everything inside this script tag will run after the HTML has been loaded.
+
+## Selecting an Element
+
+The first step is to grab a reference to the `div` using `getElementById()`.
+
+```javascript
+const app = document.getElementById("app");
+```
+
+Now the `app` variable points to the `<div>` in the document, allowing us to insert new elements into it.
+
+## Creating Elements Dynamically
+
+Instead of writing an `<h1>` directly in HTML, we can create it using JavaScript.
+
+```javascript
+const app = document.getElementById("app");
+
+// Create the heading element
+const header = document.createElement("h1");
+
+// Create the text node
+const text = "Develop. Preview. Ship.";
+const headerContent = document.createTextNode(text);
+
+// Attach the text to the heading
+header.appendChild(headerContent);
+
+// Add the heading to the page
+app.appendChild(header);
+```
+
+After opening the page in your browser, you'll see the following heading displayed:
+
+```text
+Develop. Preview. Ship.
+```
+
+Even though the `<h1>` wasn't written inside the original HTML file, JavaScript created it and inserted it into the page while it was running.
+
+## HTML vs. the DOM
+
+It's important to understand that **HTML** and the **DOM** are not exactly the same thing.
+
+- **HTML** is the original source code sent to the browser.
+- **The DOM** is the live representation of that page after JavaScript has made changes.
+
+If you inspect the page using your browser's developer tools, you'll notice that the DOM now contains the newly created `<h1>` element, even though it doesn't exist in the original HTML source.
+
+This distinction is what makes JavaScript so powerful—it can modify the page long after it has been loaded.
+
+## The Downsides of Manual DOM Manipulation
+
+While manipulating the DOM directly gives developers complete control, it also requires writing a lot of repetitive code.
+
+To display a single heading, we had to:
+
+- Find an existing element
+- Create a new HTML element
+- Create a text node
+- Attach the text to the element
+- Insert the new element into the page
+
+As applications become larger, writing and maintaining this type of code becomes increasingly difficult.
+
+## Imperative vs. Declarative Programming
+
+The approach we've used so far is known as **imperative programming**.
+
+With imperative programming, you explicitly describe **how** something should happen by listing every step.
+
+A simple analogy is giving a chef detailed instructions on how to prepare a pizza—from mixing the dough to adding toppings and baking it.
+
+A **declarative** approach is different.
+
+Instead of explaining every step, you simply tell the chef, "I'd like a pepperoni pizza," and let them handle the process.
+
+The same idea applies to user interfaces. Rather than manually creating and inserting DOM elements, you describe **what** the interface should look like, and a framework handles the implementation details.
+
+## Why React?
+
+This is exactly the problem React was designed to solve.
+
+React is a **declarative JavaScript library** for building user interfaces. Instead of manually updating the DOM, developers describe the desired UI, and React efficiently updates the page whenever data changes.
+
+This approach reduces boilerplate code, improves readability, and makes applications much easier to maintain as they grow.
+
+## Conclusion
+
+Using JavaScript to manipulate the DOM helps us understand what happens behind the scenes when a webpage updates dynamically. Although this method works well for small examples, it quickly becomes verbose in larger applications.
+
+Libraries like React build on these same concepts but provide a more declarative way of building interfaces, allowing developers to focus on **what** they want to display rather than **how** to update the DOM.

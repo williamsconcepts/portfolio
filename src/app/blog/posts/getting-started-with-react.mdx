@@ -1,0 +1,212 @@
+---
+title: "Getting Started with React"
+summary: "Learn how to set up React without a build tool, understand JSX and Babel, and discover how React simplifies UI development through a declarative approach."
+
+publishedAt: "2026-07-05"
+tag: "React"
+---
+
+React makes building user interfaces much simpler by allowing developers to describe **what** they want to display instead of manually updating the DOM. In this guide, we'll set up React from scratch, learn why JSX is needed, and understand how React differs from traditional JavaScript DOM manipulation.
+
+## Loading React
+
+The quickest way to experiment with React is by loading it directly from a CDN. To do this, include two script files in your HTML document.
+
+- **React** – the core library used for building user interfaces.
+- **ReactDOM** – provides the methods React uses to interact with the browser's DOM.
+
+Start with the following HTML:
+
+```html
+<html>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  </body>
+</html>
+```
+
+These scripts make React available globally, allowing you to build small applications without installing any tools.
+
+## Creating a React Root
+
+In plain JavaScript, we manually created elements and inserted them into the page. React replaces that workflow with a **root**.
+
+A root represents the area of the page that React controls.
+
+```html
+<script>
+  const app = document.getElementById("app");
+  const root = ReactDOM.createRoot(app);
+
+  root.render(<h1>Develop. Preview. Ship.</h1>);
+</script>
+```
+
+Here, React targets the `#app` element and renders an `<h1>` inside it.
+
+This code is significantly shorter and easier to understand than manually creating DOM elements.
+
+## Why Does This Produce an Error?
+
+If you try running the previous example immediately, you'll encounter an error similar to:
+
+```text
+Uncaught SyntaxError: expected expression, got '<'
+```
+
+The browser doesn't recognize the `<h1>` syntax because it isn't valid JavaScript.
+
+That's because React is using **JSX**.
+
+## Understanding JSX
+
+JSX is a syntax extension for JavaScript that allows developers to write HTML-like code directly inside JavaScript.
+
+For example:
+
+```jsx
+<h1>Develop. Preview. Ship.</h1>
+```
+
+Although it looks like HTML, it's actually JSX.
+
+JSX makes React components easier to read and write because your UI closely resembles the final markup you'll see in the browser.
+
+The only downside is that browsers don't understand JSX natively.
+
+Before it can run, JSX must be converted into standard JavaScript.
+
+## Introducing Babel
+
+To translate JSX into JavaScript, we'll use **Babel**.
+
+Include Babel by adding another script tag to your page.
+
+```html
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+```
+
+Next, change your JavaScript script tag from:
+
+```html
+<script type="text/javascript">
+```
+
+to:
+
+```html
+<script type="text/jsx">
+```
+
+This tells Babel to compile everything inside that script before the browser executes it.
+
+Your completed HTML file should look like this:
+
+```html
+<html>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/jsx">
+      const domNode = document.getElementById("app");
+      const root = ReactDOM.createRoot(domNode);
+
+      root.render(<h1>Develop. Preview. Ship.</h1>);
+    </script>
+  </body>
+</html>
+```
+
+If everything has been configured correctly, opening the page in your browser will display:
+
+```text
+Develop. Preview. Ship.
+```
+
+## React vs. Plain JavaScript
+
+Let's compare both approaches.
+
+### Traditional JavaScript
+
+```javascript
+const app = document.getElementById("app");
+
+const header = document.createElement("h1");
+
+const text = "Develop. Preview. Ship.";
+
+const headerContent = document.createTextNode(text);
+
+header.appendChild(headerContent);
+
+app.appendChild(header);
+```
+
+To display one heading, you need to:
+
+- Find an existing element.
+- Create a new HTML element.
+- Create a text node.
+- Attach the text node.
+- Insert the element into the page.
+
+### React
+
+```jsx
+const domNode = document.getElementById("app");
+
+const root = ReactDOM.createRoot(domNode);
+
+root.render(<h1>Develop. Preview. Ship.</h1>);
+```
+
+With React, you simply describe the interface you want, and React handles the DOM updates for you.
+
+This declarative approach results in cleaner, more maintainable code, especially as applications become larger.
+
+## Why React Is So Popular
+
+React isn't just a library for rendering HTML—it manages the complexity of updating the user interface efficiently.
+
+Instead of manually creating, removing, and updating DOM elements, React determines the minimal changes needed and applies them automatically.
+
+This allows developers to spend more time building features and less time writing repetitive DOM manipulation code.
+
+
+## Why do you need to compile your React code?
+
+React uses JSX which needs to be compiled into JavaScript.
+
+JSX is a syntax extension for JavaScript, but browsers don't understand JSX out of the box, so you'll need a JavaScript compiler to transform your JSX code into regular JavaScript.
+
+
+## JavaScript Knowledge You'll Need
+
+Although React simplifies UI development, it builds heavily on modern JavaScript.
+
+Some of the most important JavaScript concepts you'll encounter include:
+
+- Functions and arrow functions
+- Objects
+- Arrays and array methods
+- Object and array destructuring
+- Template literals
+- Ternary operators
+- ES Modules (`import` and `export`)
+
+You don't need to master every JavaScript feature before learning React, but becoming comfortable with these topics will make your React journey much smoother.
+
+## Conclusion
+
+React introduces a more expressive and declarative way to build user interfaces. By combining JSX with ReactDOM, developers can describe their UI using simple, readable code while React takes care of updating the DOM efficiently.
+
+As you continue learning React, you'll discover how this foundation scales into reusable components, state management, and interactive applications.

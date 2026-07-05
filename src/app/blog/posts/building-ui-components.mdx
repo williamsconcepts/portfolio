@@ -1,0 +1,225 @@
+---
+title: "Building UI with React Components"
+summary: "Learn the fundamentals of React components, how to create reusable UI elements, nest components together, and build scalable component trees."
+image: "/images/gallery/learn-components.avif"
+publishedAt: "2026-07-05"
+tag: "React"
+---
+
+React applications are built by combining small, reusable pieces called **components**. Instead of creating an entire interface as one large block of code, React encourages you to break your UI into independent parts that can be reused throughout your application.
+
+Components are one of React's three core concepts, alongside **Props** and **State**. Understanding these fundamentals will make it much easier to build modern React and Next.js applications.
+
+## React's Three Core Concepts
+
+Every React application revolves around three key ideas:
+
+- **Components** – reusable pieces of the user interface.
+- **Props** – data passed from one component to another.
+- **State** – data that changes over time and updates the UI.
+
+In this article, we'll focus on components, the foundation of every React application.
+
+## What Are Components?
+
+A component is a self-contained piece of your user interface.
+
+Think of components like LEGO bricks. Each brick serves a specific purpose, but when combined, they create something much larger.
+
+For example, a website header could be divided into several smaller components:
+
+- Logo
+- Navigation Menu
+- Search Bar
+- User Profile
+
+Each of these pieces can be developed, updated, and reused independently without affecting the rest of the application.
+
+This modular approach makes applications easier to maintain as they grow.
+
+## Components Are JavaScript Functions
+
+One of the best things about React is that components are simply JavaScript functions.
+
+Let's create our first component.
+
+```jsx
+function Header() {
+
+}
+```
+
+At the moment, this function doesn't display anything.
+
+To make it useful, return some JSX.
+
+```jsx
+function Header() {
+  return <h1>Develop. Preview. Ship.</h1>;
+}
+```
+
+Whenever React renders this component, it will display the heading.
+
+## Rendering a Component
+
+To display a React component on the page, first create a React root.
+
+```jsx
+const app = document.getElementById("app");
+
+const root = ReactDOM.createRoot(app);
+```
+
+Then render your component.
+
+```jsx
+root.render(<Header />);
+```
+
+Notice the syntax.
+
+Instead of calling the function like this:
+
+```javascript
+Header();
+```
+
+React components are written using HTML-like tags.
+
+```jsx
+<Header />
+```
+
+This tells React to render the component into the DOM.
+
+## Why Component Names Start with Capital Letters
+
+React distinguishes custom components from standard HTML elements using capitalization.
+
+For example:
+
+```jsx
+function Header() {
+  return <h1>Develop. Preview. Ship.</h1>;
+}
+```
+
+is correct.
+
+However:
+
+```jsx
+function header() {
+  return <h1>Develop. Preview. Ship.</h1>;
+}
+```
+
+is not recommended.
+
+Lowercase names are interpreted as HTML elements, while uppercase names tell React that you're rendering a custom component.
+
+As a rule of thumb, always name React components using **PascalCase**.
+
+Examples include:
+
+- `Header`
+- `HomePage`
+- `NavigationBar`
+- `ProductCard`
+
+## Nesting Components
+
+Real applications rarely consist of a single component.
+
+Instead, components are combined to build larger interfaces.
+
+Let's create another component.
+
+```jsx
+function HomePage() {
+  return (
+    <div>
+
+    </div>
+  );
+}
+```
+
+Now we can place the `Header` component inside it.
+
+```jsx
+function Header() {
+  return <h1>Develop. Preview. Ship.</h1>;
+}
+
+function HomePage() {
+  return (
+    <div>
+      <Header />
+    </div>
+  );
+}
+```
+
+Finally, render the `HomePage` component.
+
+```jsx
+const root = ReactDOM.createRoot(app);
+
+root.render(<HomePage />);
+```
+
+When React renders `HomePage`, it also renders every component nested inside it.
+
+## Understanding Component Trees
+
+As applications grow, components become organized into a **component tree**.
+
+For example:
+
+```text
+HomePage
+├── Header
+│   ├── Logo
+│   ├── Navigation
+│   └── SearchBar
+├── MainContent
+│   ├── Article
+│   ├── Sidebar
+│   └── Comments
+└── Footer
+```
+
+Each component can contain additional child components, creating a hierarchy similar to the structure of an HTML document.
+
+This organization makes large applications much easier to understand and maintain.
+
+## Why Components Matter
+
+Breaking your interface into reusable components provides several advantages:
+
+- **Reusability** – Build a component once and use it throughout your application.
+- **Maintainability** – Update a single component without affecting unrelated parts of the UI.
+- **Readability** – Smaller components are easier to understand than one large file.
+- **Scalability** – Large applications remain organized as new features are added.
+
+Instead of repeating the same markup multiple times, you create one component and reuse it wherever it's needed.
+
+## Best Practices
+
+As you begin building React applications, keep these guidelines in mind:
+
+- Give components descriptive names.
+- Use **PascalCase** for component names.
+- Keep each component focused on a single responsibility.
+- Build larger interfaces by combining smaller components.
+- Render a single top-level component, such as `HomePage`, into the React root.
+
+Following these practices will make your codebase cleaner and easier to expand over time.
+
+## Conclusion
+
+Components are the building blocks of every React application. Since they're simply JavaScript functions that return JSX, they're easy to write, reuse, and compose into larger interfaces.
+
+As your application grows, you'll build component trees that organize your UI into small, manageable pieces. In the next step of your React journey, you'll learn how to make these components more dynamic using **Props** and **State**.
