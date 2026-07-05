@@ -1,0 +1,333 @@
+---
+title: "Displaying Data with Props in React"
+summary: "Learn how to make React components dynamic using props, pass data between components, render JavaScript expressions in JSX, and display lists efficiently."
+
+publishedAt: "2026-07-05"
+tag: "React"
+---
+
+One of the biggest advantages of React is the ability to build **reusable components**. So far, our components have always displayed the same content, but real-world applications need to display different information depending on the situation.
+
+This is where **props** come in.
+
+Props (short for **properties**) allow components to receive data from their parent component, making them flexible and reusable.
+
+## Why Do We Need Props?
+
+Consider this simple component:
+
+```jsx
+function Header() {
+  return <h1>Develop. Preview. Ship.</h1>;
+}
+```
+
+If we reuse it multiple times:
+
+```jsx
+function HomePage() {
+  return (
+    <div>
+      <Header />
+      <Header />
+    </div>
+  );
+}
+```
+
+Both headings will display the exact same text.
+
+But what if one should say **React** and another should say **Next.js**?
+
+Instead of creating multiple versions of the same component, we can pass data into it using props.
+
+## Understanding Props
+
+Props work similarly to HTML attributes.
+
+For example:
+
+```html
+<img src="profile.jpg" />
+
+<a href="/about">About</a>
+```
+
+The `src` attribute changes the displayed image, while the `href` attribute changes where the link points.
+
+React components behave the same way.
+
+You can pass custom values into a component like this:
+
+```jsx
+<Header title="React" />
+```
+
+Here, `title` is a prop.
+
+## Receiving Props
+
+A component receives props as its first function parameter.
+
+```jsx
+function Header(props) {
+  console.log(props);
+
+  return <h1>Develop. Preview. Ship.</h1>;
+}
+```
+
+The console output looks like this:
+
+```javascript
+{
+  title: "React"
+}
+```
+
+Props are simply JavaScript objects.
+
+## Using Object Destructuring
+
+Since props are objects, you can destructure them directly in the function parameters.
+
+```jsx
+function Header({ title }) {
+  console.log(title);
+
+  return <h1>Develop. Preview. Ship.</h1>;
+}
+```
+
+Now you can access `title` directly without writing `props.title` every time.
+
+This approach is cleaner and is commonly used in React applications.
+
+## Displaying Variables in JSX
+
+Suppose we replace the heading with:
+
+```jsx
+function Header({ title }) {
+  return <h1>title</h1>;
+}
+```
+
+The browser displays:
+
+```text
+title
+```
+
+instead of:
+
+```text
+React
+```
+
+That's because React treats text inside JSX as plain strings unless told otherwise.
+
+To insert JavaScript values into JSX, wrap them in **curly braces**.
+
+```jsx
+function Header({ title }) {
+  return <h1>{title}</h1>;
+}
+```
+
+Now React evaluates the variable and renders its value.
+
+## JavaScript Inside JSX
+
+Curly braces allow you to use almost any JavaScript expression inside JSX.
+
+### Accessing Object Properties
+
+```jsx
+function Header(props) {
+  return <h1>{props.title}</h1>;
+}
+```
+
+### Using Template Literals
+
+```jsx
+function Header({ title }) {
+  return <h1>{`Learning ${title}`}</h1>;
+}
+```
+
+This renders:
+
+```text
+Learning React
+```
+
+### Calling Functions
+
+You can also call JavaScript functions.
+
+```jsx
+function createTitle(title) {
+  if (title) {
+    return title;
+  }
+
+  return "Default Title";
+}
+
+function Header({ title }) {
+  return <h1>{createTitle(title)}</h1>;
+}
+```
+
+This is useful for formatting data before displaying it.
+
+### Conditional Rendering
+
+A ternary operator lets you display different values depending on a condition.
+
+```jsx
+function Header({ title }) {
+  return (
+    <h1>
+      {title ? title : "Default Title"}
+    </h1>
+  );
+}
+```
+
+If no title is passed, the component displays:
+
+```text
+Default Title
+```
+
+instead of leaving the heading empty.
+
+## Reusing Components with Different Props
+
+Because the component now accepts props, it becomes much more reusable.
+
+```jsx
+function HomePage() {
+  return (
+    <div>
+      <Header title="React" />
+      <Header title="Next.js" />
+      <Header title="JavaScript" />
+    </div>
+  );
+}
+```
+
+The same component now displays three different headings without duplicating any code.
+
+## One-Way Data Flow
+
+React follows a principle called **one-way data flow**.
+
+This means data always moves from:
+
+```text
+Parent Component
+        ↓
+Child Component
+```
+
+The parent passes data to its children using props.
+
+Child components receive the data but cannot directly modify it.
+
+This predictable flow makes React applications easier to understand and debug.
+
+## Rendering Lists
+
+Displaying lists of data is a common task in React.
+
+Suppose you have an array of names.
+
+```jsx
+const names = [
+  "Ada Lovelace",
+  "Grace Hopper",
+  "Margaret Hamilton",
+];
+```
+
+Instead of writing each list item manually, you can generate them using `map()`.
+
+```jsx
+function HomePage() {
+  const names = [
+    "Ada Lovelace",
+    "Grace Hopper",
+    "Margaret Hamilton",
+  ];
+
+  return (
+    <div>
+      <Header title="Develop. Preview. Ship." />
+
+      <ul>
+        {names.map((name) => (
+          <li>{name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+The `map()` method loops through every item in the array and returns a new `<li>` element for each name.
+
+React then renders the complete list.
+
+## Why the `key` Prop Matters
+
+If you run the previous example, React will display a warning.
+
+It expects every item in a list to have a unique `key`.
+
+```jsx
+<li key={name}>{name}</li>
+```
+
+The `key` helps React identify which items have changed, been added, or removed when the list updates.
+
+For simple examples, using the name works because each value is unique.
+
+In production applications, it's best to use a unique identifier, such as a database ID.
+
+```jsx
+const users = [
+  {
+    id: 1,
+    name: "Ada Lovelace",
+  },
+];
+```
+
+```jsx
+<li key={user.id}>{user.name}</li>
+```
+
+Using stable keys improves React's rendering performance and prevents unnecessary updates.
+
+## Best Practices
+
+When working with props and lists, keep these recommendations in mind:
+
+- Use props to make components reusable.
+- Destructure props for cleaner code.
+- Wrap JavaScript expressions inside JSX with curly braces.
+- Use default values when appropriate.
+- Render lists using `map()`.
+- Always provide a unique `key` for list items.
+- Pass data from parent components to child components rather than the other way around.
+
+## Conclusion
+
+Props make React components dynamic by allowing them to receive data from their parent components. Combined with JSX, JavaScript expressions, and array methods like `map()`, you can build flexible interfaces that render different content while keeping your code clean and reusable.
+
+Understanding props is an important milestone in learning React. The next step is learning **State**, which allows components to manage and update their own data as users interact with your application.
