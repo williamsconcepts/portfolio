@@ -422,6 +422,12 @@ const about: About = {
             width: 16,
             height: 9,
           },
+          {
+            src: "/images/projects/project-01/cert4.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
         ],
       },
         {
