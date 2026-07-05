@@ -1,0 +1,245 @@
+---
+title: "Adding Interactivity with State in React"
+summary: "Learn how to make React applications interactive using event handlers and the useState hook to manage dynamic data and respond to user actions."
+image: "/images/gallery/learn-state.avif"
+publishedAt: "2026-07-05"
+tag: "React"
+---
+
+Static user interfaces can display information, but modern web applications need to respond to user interactions. Whether it's clicking a button, filling out a form, or toggling a menu, React makes it easy to build interactive experiences using **event handlers** and **state**.
+
+In this guide, you'll learn how to respond to user events and use React's `useState` hook to create dynamic interfaces.
+
+## Why State Matters
+
+Imagine adding a **Like** button to your application.
+
+Initially, the button might look like this:
+
+```jsx
+<button>Like</button>
+```
+
+While the button is visible, clicking it doesn't do anything because no behavior has been attached to it.
+
+To make the button interactive, React uses **events**.
+
+## Listening for Events
+
+React provides event handlers that allow components to respond to user actions.
+
+For example, to detect when a button is clicked, use the `onClick` event.
+
+```jsx
+<button onClick={}>Like</button>
+```
+
+Unlike HTML event attributes, React events use **camelCase** naming.
+
+Some common React events include:
+
+- `onClick` – responds to mouse clicks.
+- `onChange` – detects changes in form fields.
+- `onSubmit` – handles form submissions.
+- `onKeyDown` – responds to keyboard input.
+
+These events make it possible to build interactive user interfaces.
+
+## Creating an Event Handler
+
+Instead of placing JavaScript directly inside the `onClick` attribute, it's best practice to define a separate function.
+
+```jsx
+function HomePage() {
+
+  function handleClick() {
+    console.log("Button clicked!");
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Like
+    </button>
+  );
+}
+```
+
+Whenever the button is clicked, React executes the `handleClick()` function.
+
+If you open your browser's developer console, you'll see the message printed every time you press the button.
+
+Although this demonstrates event handling, the interface itself still doesn't change.
+
+To update the UI, we need **state**.
+
+## What Is State?
+
+State represents data that can change while your application is running.
+
+Examples include:
+
+- A like counter
+- A shopping cart total
+- A user's login status
+- Form input values
+- A dark mode toggle
+
+Whenever state changes, React automatically updates the interface to reflect the new value.
+
+## Introducing the `useState` Hook
+
+React provides a Hook called `useState()` for managing state.
+
+Hooks are special functions that allow React components to use features like state and lifecycle behavior.
+
+To create state, call `React.useState()`.
+
+```jsx
+const [] = React.useState();
+```
+
+The function returns an array containing two values.
+
+## Understanding the Returned Array
+
+The first value is the current state.
+
+```jsx
+const [likes] = React.useState();
+```
+
+The second value is a function used to update that state.
+
+```jsx
+const [likes, setLikes] = React.useState();
+```
+
+By convention:
+
+- State variables use descriptive names like `likes`.
+- Update functions begin with `set`, such as `setLikes`.
+
+This naming convention makes React code easier to read.
+
+## Setting an Initial Value
+
+State usually starts with an initial value.
+
+For a like counter, the starting value is zero.
+
+```jsx
+const [likes, setLikes] = React.useState(0);
+```
+
+Now the component remembers that the current number of likes is `0`.
+
+## Displaying State
+
+Because state is just a JavaScript value, it can be displayed inside JSX using curly braces.
+
+```jsx
+<button>
+  Likes ({likes})
+</button>
+```
+
+When the page first loads, the button displays:
+
+```text
+Likes (0)
+```
+
+The number is no longer hardcoded—it comes directly from the component's state.
+
+## Updating State
+
+Displaying state is useful, but the real power comes from updating it.
+
+Modify the click handler to increment the number of likes.
+
+```jsx
+function handleClick() {
+  setLikes(likes + 1);
+}
+```
+
+Every time the button is clicked:
+
+1. The click event fires.
+2. `handleClick()` executes.
+3. `setLikes()` updates the state.
+4. React re-renders the component.
+5. The displayed number increases.
+
+The complete component looks like this:
+
+```jsx
+function HomePage() {
+  const [likes, setLikes] = React.useState(0);
+
+  function handleClick() {
+    setLikes(likes + 1);
+  }
+
+  return (
+    <div>
+      <button onClick={handleClick}>
+        Likes ({likes})
+      </button>
+    </div>
+  );
+}
+```
+
+Clicking the button repeatedly updates the counter automatically.
+
+## How React Updates the UI
+
+One of React's greatest strengths is that you never manipulate the DOM directly.
+
+Instead of writing code like:
+
+```javascript
+document.getElementById("likes").textContent = likes;
+```
+
+you simply update the state.
+
+```jsx
+setLikes(likes + 1);
+```
+
+React detects the state change and updates only the necessary parts of the page.
+
+This declarative approach keeps your code simpler and easier to maintain.
+
+## Props vs. State
+
+Although props and state both store data, they serve different purposes.
+
+| Props | State |
+|--------|-------|
+| Passed from a parent component | Created and managed inside a component |
+| Read-only | Can be updated |
+| Used to configure components | Used for dynamic, changing data |
+| Flow from parent to child | Belongs to the component that created it |
+
+A common pattern is to store state in a parent component and pass its value down to child components through props.
+
+## Best Practices
+
+When working with state, keep these recommendations in mind:
+
+- Use state only for data that changes over time.
+- Keep state as close as possible to where it's used.
+- Update state using its setter function instead of modifying it directly.
+- Give state variables descriptive names.
+- Use event handlers to trigger state updates.
+
+Following these practices helps keep React applications predictable and easy to maintain.
+
+## Conclusion
+
+State is what makes React applications interactive. Combined with event handlers like `onClick`, the `useState` hook allows components to respond to user actions and automatically update the interface.
+
+Instead of manually changing the DOM, you simply update the component's state and let React handle the rendering. This approach is one of the core ideas that makes React powerful, efficient, and enjoyable to work with as your applications grow.
