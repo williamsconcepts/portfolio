@@ -1,0 +1,193 @@
+---
+title: "From React to Next.js"
+summary: "Discover why developers move from React to Next.js, how Next.js extends React with powerful features, and what to expect as you transition to building production-ready applications."
+image: "/images/blog/from-react-to-nextjs.png"
+publishedAt: "2026-07-05"
+tag: "Next.js"
+---
+
+By now, you've learned the core concepts that make React such a powerful library:
+
+- **Components** for building reusable user interfaces.
+- **Props** for passing data between components.
+- **State** for creating dynamic and interactive applications.
+
+With these fundamentals, you can already build small React applications. In fact, our application now includes reusable components, dynamic data, rendered lists, and a working like button—all built with React.
+
+## Our React Application So Far
+
+Using only React, Babel, and a simple HTML file, we created an application that:
+
+- Displays reusable components.
+- Passes data using props.
+- Renders lists from arrays.
+- Responds to user interactions.
+- Updates the interface using state.
+
+Although this is an excellent way to learn React, it's only the beginning.
+
+As applications become larger, managing everything inside a single HTML file quickly becomes difficult.
+
+## Learning React by Building
+
+The best way to become comfortable with React is to build real projects.
+
+One advantage of React is that it can be introduced gradually into an existing website. You don't have to rewrite an entire application immediately.
+
+For example, you can include React with simple `<script>` tags and enhance specific parts of an existing page.
+
+This incremental approach makes React accessible, especially when working with traditional HTML, CSS, and JavaScript projects.
+
+However, many developers eventually choose to build their entire frontend using React because of its flexibility, maintainability, and rich ecosystem.
+
+## Where React Starts to Show Its Limits
+
+React is focused on one primary responsibility:
+
+**Building user interfaces.**
+
+While it's excellent at rendering components and updating the DOM efficiently, React doesn't include everything required to build a production-ready web application.
+
+For example, React doesn't provide built-in solutions for:
+
+- File-based routing
+- Server-side rendering
+- Static site generation
+- Image optimization
+- API routes
+- Metadata management
+- Performance optimizations
+- Project structure and configuration
+
+As your application grows, you'll often find yourself installing additional libraries to handle these features.
+
+This is where a framework becomes valuable.
+
+## Introducing Next.js
+
+**Next.js** is a React framework that builds on top of React and provides everything needed to develop modern web applications.
+
+Instead of configuring dozens of tools yourself, Next.js includes many essential features out of the box.
+
+Some of its most popular capabilities include:
+
+- File-based routing
+- Server-side rendering (SSR)
+- Static site generation (SSG)
+- API routes
+- Automatic code splitting
+- Built-in image optimization
+- Font optimization
+- Metadata management
+- Improved developer experience
+- Excellent production performance
+
+By handling much of the setup and configuration, Next.js allows developers to focus on building features rather than configuring tooling.
+
+A useful way to think about it is:
+
+- **React** provides the building blocks.
+- **Next.js** provides the complete architecture.
+
+## Why Next.js Is Popular
+
+As React evolved, new capabilities such as **Server Components** and **Client Components** were introduced.
+
+These features improve application performance and user experience, but they require framework support.
+
+Next.js is designed to take advantage of these modern React features while simplifying their implementation.
+
+It also handles many complex tasks automatically, allowing developers to build scalable applications without extensive configuration.
+
+## Complete Example
+
+Here's the complete React application we've built throughout this guide. It combines reusable components, props, state, event handling, and list rendering into a single example.
+
+```html
+<html>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/jsx">
+      const app = document.getElementById("app");
+
+      function Header({ title }) {
+        return <h1>{title ? title : "Default title"}</h1>;
+      }
+
+      function HomePage() {
+        const names = [
+          "Ada Lovelace",
+          "Grace Hopper",
+          "Margaret Hamilton",
+        ];
+
+        const [likes, setLikes] = React.useState(0);
+
+        function handleClick() {
+          setLikes(likes + 1);
+        }
+
+        return (
+          <div>
+            <Header title="Develop. Preview. Ship." />
+
+            <ul>
+              {names.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+
+            <button onClick={handleClick}>
+              Like ({likes})
+            </button>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(app);
+
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
+```
+
+This example demonstrates several core React concepts working together:
+
+- Components for building reusable UI.
+- Props for passing data to components.
+- State with `useState()` for managing dynamic values.
+- Event handling with `onClick`.
+- Rendering lists using `map()`.
+- Conditional rendering with JSX.
+
+## What's Coming Next
+
+Now that you understand the fundamentals of React, you're ready to begin working with Next.js.
+
+As you continue learning, you'll explore topics such as:
+
+- Creating a Next.js project
+- Understanding the App Router
+- File-based routing
+- Layouts and pages
+- Server Components
+- Client Components
+- Data fetching
+- Rendering strategies
+- Building full-stack React applications
+
+These concepts build directly on the React knowledge you've already gained.
+
+## Conclusion
+
+Learning React provides the foundation for modern frontend development. By mastering components, props, and state, you've learned the core ideas behind building interactive user interfaces.
+
+Next.js takes those concepts further by adding the tools and architecture needed to build complete, scalable, and production-ready applications. Rather than replacing React, Next.js enhances it, giving developers a faster, more structured, and more powerful way to create modern web experiences.
+
+In the next chapter, you'll begin your journey into Next.js and discover how it transforms React into a full-featured application framework.
