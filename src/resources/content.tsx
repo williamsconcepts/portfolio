@@ -23,6 +23,12 @@ const social: Social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   // Set essentials: true for links you want to show on the about page
+    {
+    name: "Resume",
+    icon: "resume",
+    link: "https://canva.link/rr056buhec7z124",
+    essential: true,
+  },
   {
     name: "GitHub",
     icon: "github",
