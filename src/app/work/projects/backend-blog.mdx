@@ -1,0 +1,96 @@
+---
+title: "Backend Blog API"
+publishedAt: "2026-07-04"
+summary: "A RESTful blog backend built with Express.js, Knex.js, and SQLite for managing posts, categories, comments, and likes."
+images:
+  - "/images/projects/project-01/blog-api.png"
+  - "/images/projects/project-01/blog-api2.png"
+link: "https://github.com/williamsconcepts/blog"
+---
+
+## Project Link
+
+Visit the project: [Blog API](https://github.com/williamsconcepts/blog)
+
+## Overview
+
+A RESTful Blog API built with **Express.js, Knex.js, and SQLite**. The application provides a complete backend for managing blog posts, categories, comments, and likes through RESTful endpoints.
+
+It demonstrates backend development concepts such as routing, CRUD operations, relational database management, migrations, query building, and API design using Express.js and Knex.js.
+
+## Features
+
+### Posts
+
+- Create new blog posts
+- View all posts with their comments
+- View a single post
+- Update existing posts
+- Delete posts with fewer than 5 comments
+- Like posts
+
+### Categories
+
+- Create categories
+- View all categories
+- Assign categories to posts
+- Delete categories that have no posts assigned
+
+### Comments
+
+- Add comments to posts
+- Associate comments with individual posts
+- View comments by post
+
+### Popular Posts
+
+Rank blog posts based on:
+
+- Number of likes
+
+## Technologies Used
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+
+- Node.js
+- Express.js
+- Knex.js
+- SQLite
+- REST API
+
+## Backend Concepts Implemented
+
+- RESTful API Design
+- CRUD Operations
+- Express Routing
+- Middleware
+- Knex Query Builder
+- Database Migrations
+- SQLite Relational Database
+- One-to-Many Relationships
+- HTTP Status Codes
+- Error Handling
+
+## Project Structure
+
+```text
+blog-api/
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── backend/
+│   ├── index.js
+│   ├── db.js
+│   ├── database.sqlite3
+│   └── migrations/
+│
+└── README.md
+```
