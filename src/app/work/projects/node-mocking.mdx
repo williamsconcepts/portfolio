@@ -1,0 +1,96 @@
+---
+title: "Node.js WebSocket Mock Service"
+publishedAt: "2026-07-07"
+summary: "A mock product service built with Node.js and Fastify that combines REST APIs with WebSockets to deliver real-time product order updates."
+images:
+  - "/images/projects/project-01/node-mocking.png"
+  - "/images/projects/project-01/node-mocking2.png"
+link: "https://github.com/williamsconcepts/node-mocking"
+---
+
+## Project Link
+
+Visit the project: [Node.js WebSocket Mock Service](https://github.com/williamsconcepts/node-mocking)
+
+## Overview
+
+A real-time mock service built with **Node.js, Fastify, and WebSockets**. The project combines traditional REST APIs with persistent WebSocket connections to simulate a product service that streams live order updates to connected clients.
+
+Rather than repeatedly polling the server for changes, the frontend establishes a long-lived WebSocket connection, allowing the server to push updated order counts instantly whenever new orders are received. This project demonstrates how REST APIs and WebSockets can work together to create responsive, real-time applications.
+
+## Features
+
+### Product API
+
+- Retrieve products by category
+- Add new products through REST endpoints
+- Return JSON responses for frontend consumption
+
+### Real-Time Updates
+
+- Live product order count updates
+- Persistent WebSocket connections
+- Server-to-client event broadcasting
+- Dynamic category subscription
+- Instant UI updates without page refreshes
+
+### Mock Service
+
+- Simulated product catalog
+- Mock order generation
+- Real-time order monitoring
+- Lightweight backend for frontend testing
+
+## Technologies Used
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Web Components
+- Fetch API
+- WebSocket API
+
+### Backend
+
+- Node.js
+- Fastify
+- WebSockets
+- REST API
+
+## Backend Concepts Implemented
+
+- RESTful API Design
+- WebSocket Communication
+- HTTP Upgrade Requests
+- Bidirectional Client-Server Communication
+- Event-Driven Programming
+- Fastify Plugins
+- Route Registration
+- Asynchronous JavaScript
+- JSON Message Protocols
+- Real-Time Data Streaming
+- API Integration
+- Error Handling
+
+## Project Structure
+
+```text
+node-mocking/
+├── mock-srv/
+│   ├── plugins/
+│   ├── routes/
+│   │   ├── orders/
+│   │   └── products/
+│   ├── app.js
+│   └── package.json
+│
+├── static/
+│   ├── index.html
+│   ├── app.js
+│   ├── styles.css
+│   └── components/
+│
+└── README.md
+```
