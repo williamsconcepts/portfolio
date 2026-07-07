@@ -24,8 +24,8 @@ const social: Social = [
   // Import new icons in /once-ui/icons.ts
   // Set essentials: true for links you want to show on the about page
     {
-    name: "Resume",
-    icon: "resume",
+    name: "Resume/CV",
+    icon: "book",
     link: "https://canva.link/rr056buhec7z124",
     essential: true,
   },
@@ -117,6 +117,28 @@ const about: About = {
     display: true, // set to false to hide this section
     title: "Selected Projects",
     experiences: [
+      {
+        company: "Node.js WebSocket Mock Service",
+        timeframe: "2026",
+        role: "Product API",
+        link: "https://github.com/williamsconcepts/node-mocking",
+        achievements: [
+          <>
+            A real-time mock service built with **Node.js, Fastify, and WebSockets**. 
+          </>,
+          <>
+            The project combines traditional REST APIs with persistent WebSocket connections to simulate a product service that streams live order updates to connected clients.
+          </>,
+        ],
+        images: [
+          {
+            src: "/images/projects/project-01/node-mocking2.png",
+            alt: "Node.js WebSocket Mock Service project preview",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
       {
         company: "Maintx360",
         timeframe: "2026",
