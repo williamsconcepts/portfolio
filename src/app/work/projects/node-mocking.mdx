@@ -1,7 +1,7 @@
 ---
 title: "Node.js WebSocket Mock Service"
 publishedAt: "2026-07-07"
-summary: "A mock product service built with Node.js and Fastify that combines REST APIs with WebSockets to deliver real-time product order updates."
+summary: "A real-time mock product service built with Node.js, Fastify, REST APIs, WebSockets, and a custom command-line tool for simulating live product orders."
 images:
   - "/images/projects/project-01/node-mocking.png"
   - "/images/projects/project-01/node-mocking2.png"
@@ -14,32 +14,43 @@ Visit the project: [Node.js WebSocket Mock Service](https://github.com/williamsc
 
 ## Overview
 
-A real-time mock service built with **Node.js, Fastify, and WebSockets**. The project combines traditional REST APIs with persistent WebSocket connections to simulate a product service that streams live order updates to connected clients.
+A real-time mock product service built with **Node.js, Fastify, REST APIs, WebSockets, and a custom Command-Line Interface (CLI)**. The application demonstrates how multiple clients can interact with the same backend using different communication methods.
 
-Rather than repeatedly polling the server for changes, the frontend establishes a long-lived WebSocket connection, allowing the server to push updated order counts instantly whenever new orders are received. This project demonstrates how REST APIs and WebSockets can work together to create responsive, real-time applications.
+The frontend retrieves product data through REST endpoints while maintaining a persistent WebSocket connection for live order updates. A separate Node.js CLI application simulates incoming product orders by sending HTTP requests directly to the backend, allowing connected clients to receive updates instantly without refreshing the page.
+
+The project showcases modern backend development concepts, including API design, event-driven programming, WebSocket communication, and building reusable developer tools.
 
 ## Features
 
 ### Product API
 
 - Retrieve products by category
-- Add new products through REST endpoints
-- Return JSON responses for frontend consumption
+- Create new products through REST endpoints
+- JSON-based API responses
+- Mock product catalog
 
 ### Real-Time Updates
 
-- Live product order count updates
 - Persistent WebSocket connections
-- Server-to-client event broadcasting
-- Dynamic category subscription
-- Instant UI updates without page refreshes
+- Live product order count updates
+- Dynamic category subscriptions
+- Server-push event broadcasting
+- Instant UI synchronization
+
+### Command-Line Tool
+
+- Custom Node.js CLI
+- Submit product orders from the terminal
+- Send HTTP POST requests to the API
+- Simulate real-world order activity
+- Trigger live updates across connected clients
 
 ### Mock Service
 
-- Simulated product catalog
-- Mock order generation
-- Real-time order monitoring
 - Lightweight backend for frontend testing
+- Simulated product inventory
+- Mock order processing
+- Event-driven architecture
 
 ## Technologies Used
 
@@ -56,8 +67,14 @@ Rather than repeatedly polling the server for changes, the frontend establishes 
 
 - Node.js
 - Fastify
-- WebSockets
 - REST API
+- WebSockets
+
+### Developer Tools
+
+- Node.js CLI
+- npm
+- HTTP Requests
 
 ## Backend Concepts Implemented
 
@@ -66,11 +83,11 @@ Rather than repeatedly polling the server for changes, the frontend establishes 
 - HTTP Upgrade Requests
 - Bidirectional Client-Server Communication
 - Event-Driven Programming
-- Fastify Plugins
+- Fastify Plugin Architecture
 - Route Registration
 - Asynchronous JavaScript
 - JSON Message Protocols
-- Real-Time Data Streaming
+- Command-Line Interface Development
 - API Integration
 - Error Handling
 
@@ -89,8 +106,16 @@ node-mocking/
 ├── static/
 │   ├── index.html
 │   ├── app.js
-│   ├── styles.css
 │   └── components/
+│
+├── my-cli/
+│   ├── package.json
+│   ├── index.js
+│   └── node_modules/
 │
 └── README.md
 ```
+
+## What I Learned
+
+This project strengthened my understanding of building real-time applications by combining REST APIs with WebSockets. It also introduced me to creating Node.js command-line tools that interact with backend services, simulating real-world client activity while demonstrating how multiple clients can communicate with the same server simultaneously.
