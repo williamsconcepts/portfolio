@@ -1,4 +1,13 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import {
+  About,
+  Blog,
+  Gallery,
+  Home,
+  Newsletter,
+  Person,
+  Social,
+  Work,
+} from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
@@ -23,7 +32,7 @@ const social: Social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   // Set essentials: true for links you want to show on the about page
-    {
+  {
     name: "Resume/CV",
     icon: "book",
     link: "https://canva.link/rr056buhec7z124",
@@ -72,7 +81,7 @@ const home: Home = {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Blog</strong>{" "} 
+        <strong className="ml-4">Blog</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
           Featured work
@@ -83,7 +92,8 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm {person.firstName}, a {person.role.toLowerCase()}, Welcome to where I craft intuitive <br /> user experiences.
+      I'm {person.firstName}, a {person.role.toLowerCase()}, Welcome to where I
+      craft intuitive <br /> user experiences.
     </>
   ),
 };
@@ -109,7 +119,11 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        {person.firstName} is a {person.role.toLowerCase()} passionate about building scalable, user-focused applications. With experience in both frontend and backend development, I enjoy solving complex problems through clean code, modern technologies, and intuitive digital experiences.
+        {person.firstName} is a {person.role.toLowerCase()} passionate about
+        building scalable, user-focused applications. With experience in both
+        frontend and backend development, I enjoy solving complex problems
+        through clean code, modern technologies, and intuitive digital
+        experiences.
       </>
     ),
   },
@@ -124,10 +138,13 @@ const about: About = {
         link: "https://github.com/williamsconcepts/node-mocking",
         achievements: [
           <>
-            A real-time mock service built with **Node.js, Fastify, and WebSockets**. 
+            A real-time mock service built with **Node.js, Fastify, and
+            WebSockets**.
           </>,
           <>
-            The project combines traditional REST APIs with persistent WebSocket connections to simulate a product service that streams live order updates to connected clients.
+            The project combines traditional REST APIs with persistent WebSocket
+            connections to simulate a product service that streams live order
+            updates to connected clients.
           </>,
         ],
         images: [
@@ -146,12 +163,12 @@ const about: About = {
         link: "https://maintx360.netlify.app/",
         achievements: [
           <>
-            Designed a maintenance management system for oil and gas operations, centralizing asset
-            tracking, work orders, and technician workflows.
+            Designed a maintenance management system for oil and gas operations,
+            centralizing asset tracking, work orders, and technician workflows.
           </>,
           <>
-            Built a dashboard-first experience focused on preventive maintenance planning and
-            operational visibility.
+            Built a dashboard-first experience focused on preventive maintenance
+            planning and operational visibility.
           </>,
         ],
         images: [
@@ -163,17 +180,21 @@ const about: About = {
           },
         ],
       },
-        {
+      {
         company: "FastPizza",
         timeframe: "2026",
         role: "Pizza Ordering API",
         link: "https://react-pizza-api.netlify.app/",
         achievements: [
           <>
-            Designed a dynamic pizza menu application built using React. It allows users to browse through a diverse selection of pizzas, view detailed information about each item, and manage their orders.
+            Designed a dynamic pizza menu application built using React. It
+            allows users to browse through a diverse selection of pizzas, view
+            detailed information about each item, and manage their orders.
           </>,
           <>
-           The application aims to enhance user experience by implementing features such as filtering options, a responsive layout, and interactive components.
+            The application aims to enhance user experience by implementing
+            features such as filtering options, a responsive layout, and
+            interactive components.
           </>,
         ],
         images: [
@@ -192,10 +213,15 @@ const about: About = {
         link: "https://draw-on-html-canvas.netlify.app/",
         achievements: [
           <>
-           Draw-On-It is a creative drawing application built with HTML5 Canvas. It offers a full-screen drawing surface where users can sketch freely with dynamic, hue-based colors that cycle smoothly across the color spectrum.
+            Draw-On-It is a creative drawing application built with HTML5
+            Canvas. It offers a full-screen drawing surface where users can
+            sketch freely with dynamic, hue-based colors that cycle smoothly
+            across the color spectrum.
           </>,
           <>
-           The experience is designed to feel expressive and interactive, with smooth strokes, responsive behavior, and automatic saving so artwork persists across refreshes.
+            The experience is designed to feel expressive and interactive, with
+            smooth strokes, responsive behavior, and automatic saving so artwork
+            persists across refreshes.
           </>,
         ],
         images: [
@@ -215,12 +241,12 @@ const about: About = {
         link: "https://oilop360.netlify.app/",
         achievements: [
           <>
-            Created a compliance-focused web app for managing contractor records, inspections, and
-            document recovery workflows.
+            Created a compliance-focused web app for managing contractor
+            records, inspections, and document recovery workflows.
           </>,
           <>
-            Simplified operational reporting and protected critical records through a recovery-driven
-            user experience.
+            Simplified operational reporting and protected critical records
+            through a recovery-driven user experience.
           </>,
         ],
         images: [
@@ -239,12 +265,12 @@ const about: About = {
         link: "https://kommunitylibrary.netlify.app/",
         achievements: [
           <>
-            Built a browser-based library management system using HTML, CSS, and JavaScript with
-            local storage persistence.
+            Built a browser-based library management system using HTML, CSS, and
+            JavaScript with local storage persistence.
           </>,
           <>
-            Implemented book and member management, borrowing flows, and real-time dashboard
-            statistics.
+            Implemented book and member management, borrowing flows, and
+            real-time dashboard statistics.
           </>,
         ],
         images: [
@@ -262,11 +288,12 @@ const about: About = {
     display: true, // set to false to hide this section
     title: "Studies",
     institutions: [
-       {
+      {
         name: "Cyphercresent Limited",
-        description: <>Studied Entrepreneurship || software engineering || UI/UX design</>,  
+        description: (
+          <>Studied Entrepreneurship || software engineering || UI/UX design</>
+        ),
       },
-    
     ],
   },
   technical: {
@@ -274,11 +301,8 @@ const about: About = {
     title: "Technical skills",
     skills: [
       {
-        
         title: "Figma",
-        description: (
-          <>Able to prototype in Figma with unnatural speed.</>
-        ),
+        description: <>Able to prototype in Figma with unnatural speed.</>,
         link: "https://www.figma.com/@chidiekwebelam",
         tags: [
           {
@@ -289,7 +313,6 @@ const about: About = {
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            
             src: "/images/projects/project-01/ui1.png",
             alt: "Project image",
             width: 16,
@@ -301,7 +324,7 @@ const about: About = {
             width: 16,
             height: 9,
           },
-           {
+          {
             src: "/images/projects/project-01/cookie.png",
             alt: "Project image",
             width: 16,
@@ -309,10 +332,14 @@ const about: About = {
           },
         ],
       },
-       {
+      {
         title: "JavaScript",
         description: (
-          <>A digital operations compliance platform for the oil and gas industry that centralizes contractor compliance, asset inspections, and record recovery workflows.</>
+          <>
+            A digital operations compliance platform for the oil and gas
+            industry that centralizes contractor compliance, asset inspections,
+            and record recovery workflows.
+          </>
         ),
         tags: [
           {
@@ -341,7 +368,9 @@ const about: About = {
       {
         title: "Next.js",
         description: (
-          <>Building a polished dashboard application with Next.js + Postgres.</>
+          <>
+            Building a polished dashboard application with Next.js + Postgres.
+          </>
         ),
         tags: [
           {
@@ -367,10 +396,13 @@ const about: About = {
           },
         ],
       },
-       {
+      {
         title: "React.js",
         description: (
-          <>Building A modern React pizza ordering experience built with Tailwind CSS</>
+          <>
+            Building A modern React pizza ordering experience built with
+            Tailwind CSS
+          </>
         ),
         tags: [
           {
@@ -396,7 +428,6 @@ const about: About = {
           },
         ],
       },
-  
     ],
   },
 
@@ -407,7 +438,10 @@ const about: About = {
       {
         title: "Software Engineering",
         description: (
-          <>Founded a strong foundation in software engineering principles, web development, and user experience design.</>
+          <>
+            Founded a strong foundation in software engineering principles, web
+            development, and user experience design.
+          </>
         ),
         tags: [
           {
@@ -434,10 +468,15 @@ const about: About = {
             name: "Next.js",
             icon: "nextjs",
           },
-      
         ],
         // optional: leave the array empty if you don't want to display images
         images: [
+          {
+            src: "/images/projects/project-01/cert5.png",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
           {
             src: "/images/projects/project-01/cert1.png",
             alt: "Project image",
@@ -458,13 +497,15 @@ const about: About = {
           },
         ],
       },
-        {
+      {
         title: "UI/UX Design",
         description: (
-          <>Founded a strong foundation in user interface and user experience design principles, development, and design thinking.</>
+          <>
+            Founded a strong foundation in user interface and user experience
+            design principles, development, and design thinking.
+          </>
         ),
         tags: [
-        
           {
             name: "UI/UX Design",
             icon: "figma",
@@ -478,10 +519,8 @@ const about: About = {
             width: 16,
             height: 9,
           },
-          
         ],
       },
-        
     ],
   },
 };
