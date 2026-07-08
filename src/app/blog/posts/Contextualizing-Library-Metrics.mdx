@@ -1,0 +1,111 @@
+---
+title: "Contextualizing Library Metrics: Looking Beyond Download Counts"
+publishedAt: "2026-07-08"
+summary: "Learn how to evaluate npm packages beyond download counts by understanding GitHub metrics, dependents, release activity, and the context behind package popularity."
+---
+
+## Overview
+
+Choosing an npm package involves more than comparing weekly download counts. While downloads can indicate adoption, they don't always reflect quality, reliability, or suitability for your project.
+
+This article explores how to evaluate libraries and frameworks by considering multiple metrics together, including GitHub activity, dependents, release frequency, and the role a package plays within the JavaScript ecosystem.
+
+## Key Metrics to Consider
+
+### npm Registry
+
+The npm registry provides several useful indicators for assessing a package:
+
+- Weekly downloads
+- Dependents
+- Version releases
+- Release frequency
+
+These metrics help determine how widely a package is used and how actively it is maintained.
+
+### GitHub
+
+GitHub offers additional insights into a project's health:
+
+- Stars
+- Issues
+- Pull Requests (PRs)
+
+Together, these metrics provide a better understanding of community engagement and maintainer activity.
+
+## Questions to Ask Before Choosing a Package
+
+Before installing a dependency, ask yourself:
+
+- Is it a **tool**, **library**, or **framework**?
+- Does it solve one problem or many?
+- Is the problem domain rapidly changing or relatively stable?
+- Does its release frequency align with its popularity?
+
+Answering these questions provides valuable context when interpreting package metrics.
+
+## Understanding GitHub Stars
+
+GitHub stars measure **interest**, not necessarily recommendation or quality.
+
+Frameworks often receive significantly more stars because they solve a broad range of problems and attract larger communities. Smaller libraries designed to solve a single problem exceptionally well may have fewer stars while still being the better choice for a specific use case.
+
+Likewise:
+
+- Recently updated issues often indicate active maintenance.
+- Reviewed and merged pull requests suggest healthy community collaboration.
+- Large numbers of stale issues and unmerged PRs may indicate that a project is no longer actively maintained.
+
+## Download Counts Need Context
+
+Weekly downloads are frequently interpreted as votes of confidence, but they should never be viewed in isolation.
+
+Many libraries are installed automatically by Continuous Integration and Continuous Deployment (CI/CD) pipelines whenever applications are built, tested, or deployed. Large organizations can generate thousands of package downloads every day without representing new developers adopting the package.
+
+Instead of comparing raw download numbers, compare packages that solve the same problem and consider how their download counts relate to other indicators such as dependents, maintenance activity, and community engagement.
+
+## Why Dependents Matter
+
+Dependents represent the number of other packages that rely on a library.
+
+A large number of dependents is often a strong indicator of trust within the JavaScript ecosystem. Libraries that serve as foundational building blocks naturally accumulate more downloads because every downstream package installation also installs their dependencies.
+
+## Tools vs. Libraries
+
+Understanding the type of package you're evaluating is equally important.
+
+### Tools
+
+Developer tools are usually installed directly by users, making their download counts a closer reflection of actual usage.
+
+Examples include:
+
+- Code formatters
+- Linters
+- Build tools
+- Command-line applications
+
+### Libraries and Frameworks
+
+Libraries and frameworks are commonly installed as dependencies by other packages and automated build systems, which can significantly inflate download statistics.
+
+For this reason, comparing a CLI tool to a popular framework based solely on download counts rarely produces meaningful conclusions.
+
+## Best Practices for Evaluating Packages
+
+Rather than relying on a single metric, consider the following:
+
+- Compare packages solving the same problem.
+- Review maintenance and release activity.
+- Examine issue and pull request responsiveness.
+- Check the number of dependents.
+- Evaluate documentation quality.
+- Consider long-term community support.
+
+Taking a holistic approach leads to better dependency choices and more maintainable projects.
+
+## Conclusion
+
+Package metrics are most valuable when interpreted together rather than individually. Download counts, GitHub stars, dependents, release frequency, issues, and pull requests each reveal a different aspect of a project's health.
+
+By understanding the context behind these metrics, developers can make more informed decisions and select packages that are not only popular but also well-maintained, reliable, and appropriate for their specific use cases.
