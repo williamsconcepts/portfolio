@@ -143,8 +143,9 @@ const about: About = {
           </>,
           <>
             The project combines traditional REST APIs with persistent WebSocket
-            connections to simulate a product service that streams live order
-            updates to connected clients.
+            connections and prototyping real-time services using Node.js to
+            simulate a product service that streams live order updates to
+            connected clients.
           </>,
         ],
         images: [
