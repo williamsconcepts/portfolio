@@ -1,13 +1,16 @@
-import { getPosts } from "@/utils/utils";
+import { getBlogPosts } from "@/utils/posts";
+import { getWorkProjects } from "@/utils/projects";
 import { baseURL, routes as routesConfig } from "@/resources";
 
 export default async function sitemap() {
-  const blogs = getPosts(["src", "app", "blog", "posts"]).map((post) => ({
+  const blogPosts = await getBlogPosts();
+  const blogs = blogPosts.map((post) => ({
     url: `${baseURL}/blog/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }));
 
-  const works = getPosts(["src", "app", "work", "projects"]).map((post) => ({
+  const workProjects = await getWorkProjects();
+  const works = workProjects.map((post) => ({
     url: `${baseURL}/work/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }));

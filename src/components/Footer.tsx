@@ -43,6 +43,13 @@ export const Footer = () => {
                 />
               ),
           )}
+          <IconButton
+            href="/admin"
+            icon="lock"
+            tooltip="Admin Portal"
+            size="s"
+            variant="ghost"
+          />
         </Row>
       </Row>
       <Row height="80" hide s={{ hide: false }} />

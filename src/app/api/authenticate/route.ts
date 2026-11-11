@@ -1,17 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as cookie from "cookie";
+import { isDbConfigured } from "@/utils/db";
+import { verifyAdminCredentials } from "@/utils/auth";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { password } = body;
-  const correctPassword = process.env.PAGE_ACCESS_PASSWORD;
+  const { password, username = "admin" } = body;
 
-  if (!correctPassword) {
-    console.error("PAGE_ACCESS_PASSWORD environment variable is not set");
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+  if (!password) {
+    return NextResponse.json({ message: "Password is required" }, { status: 400 });
   }
 
-  if (password === correctPassword) {
+  let isAuthenticated = false;
+
+  // 1. Check Neon Database credentials first
+  if (isDbConfigured()) {
+    try {
+      isAuthenticated = await verifyAdminCredentials(password, username);
+    } catch (err) {
+      console.error("Database authentication error:", err);
+    }
+  }
+
+  // 2. Fallback to env variable if not authenticated via DB
+  if (!isAuthenticated) {
+    const envPassword = process.env.PAGE_ACCESS_PASSWORD;
+    if (envPassword && password === envPassword) {
+      isAuthenticated = true;
+    }
+  }
+
+  if (isAuthenticated) {
     const response = NextResponse.json({ success: true }, { status: 200 });
 
     response.headers.set(
@@ -19,14 +38,14 @@ export async function POST(request: NextRequest) {
       cookie.serialize("authToken", "authenticated", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        maxAge: 60 * 60,
+        maxAge: 60 * 60 * 24 * 7, // 7 days
         sameSite: "strict",
         path: "/",
       }),
     );
 
     return response;
-  } else {
-    return NextResponse.json({ message: "Incorrect password" }, { status: 401 });
   }
+
+  return NextResponse.json({ message: "Incorrect password" }, { status: 401 });
 }
