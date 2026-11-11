@@ -1,9 +1,9 @@
-import { getPosts } from "@/utils/utils";
+import { getBlogPosts } from "@/utils/posts";
 import { baseURL, blog, person } from "@/resources";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const posts = getPosts(["src", "app", "blog", "posts"]);
+  const posts = await getBlogPosts();
 
   // Sort posts by date (newest first)
   const sortedPosts = posts.sort((a, b) => {

@@ -16,18 +16,41 @@ import { baseURL, about, person, social } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
 import React from "react";
+import { getProfileData } from "@/utils/profile";
 
 export async function generateMetadata() {
+  const profile = await getProfileData();
+  const title = `About – ${profile.name}`;
+  const description = `Meet ${profile.name}, ${profile.role} from ${profile.location}`;
+
   return Meta.generate({
-    title: about.title,
-    description: about.description,
+    title,
+    description,
     baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(about.title)}`,
+    image: `/api/og/generate?title=${encodeURIComponent(title)}`,
     path: about.path,
   });
 }
 
-export default function About() {
+export default async function About() {
+  const profile = await getProfileData();
+
+  const getSocialLink = (name: string, defaultLink: string) => {
+    switch (name.toLowerCase()) {
+      case "resume/cv":
+        return profile.resumeLink || defaultLink;
+      case "github":
+        return profile.githubLink || defaultLink;
+      case "linkedin":
+        return profile.linkedinLink || defaultLink;
+      case "x":
+        return profile.xLink || defaultLink;
+      case "email":
+        return profile.email ? `mailto:${profile.email}` : defaultLink;
+      default:
+        return defaultLink;
+    }
+  };
   const structure = [
     {
       title: about.intro.title,
@@ -98,10 +121,10 @@ export default function About() {
             flex={3}
             horizontal="center"
           >
-            <Avatar src={person.avatar} size="xl" />
+            <Avatar src={profile.avatar || person.avatar} size="xl" />
             <Row gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
+              {profile.location || person.location}
             </Row>
             {person.languages && person.languages.length > 0 && (
               <Row wrap gap="8">
@@ -140,7 +163,7 @@ export default function About() {
                 <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
                 <Row paddingX="8">Schedule a call</Row>
                 <IconButton
-                  href={about.calendar.link}
+                  href={profile.calendarLink || about.calendar.link}
                   data-border="rounded"
                   variant="secondary"
                   icon="chevronRight"
@@ -148,14 +171,14 @@ export default function About() {
               </Row>
             )}
             <Heading className={styles.textAlign} variant="display-strong-xl">
-              {person.name}
+              {profile.name || person.name}
             </Heading>
             <Text
               className={styles.textAlign}
               variant="display-default-xs"
               onBackground="neutral-weak"
             >
-              {person.role}
+              {profile.role || person.role}
             </Text>
             {social.length > 0 && (
               <Row
@@ -169,15 +192,15 @@ export default function About() {
                 data-border="rounded"
               >
                 {social
-                      .filter((item) => item.essential)
-                      .map(
-                  (item) =>
-                    item.link && (
+                  .filter((item) => item.essential)
+                  .map((item) => {
+                    const link = getSocialLink(item.name, item.link);
+                    return (
                       <React.Fragment key={item.name}>
                         <Row s={{ hide: true }}>
                           <Button
                             key={item.name}
-                            href={item.link}
+                            href={link}
                             prefixIcon={item.icon}
                             label={item.name}
                             size="s"
@@ -189,21 +212,21 @@ export default function About() {
                           <IconButton
                             size="l"
                             key={`${item.name}-icon`}
-                            href={item.link}
+                            href={link}
                             icon={item.icon}
                             variant="secondary"
                           />
                         </Row>
                       </React.Fragment>
-                    ),
-                )}
+                    );
+                  })}
               </Row>
             )}
           </Column>
 
           {about.intro.display && (
             <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
-              {about.intro.description}
+              {profile.introDescription || about.intro.description}
             </Column>
           )}
 

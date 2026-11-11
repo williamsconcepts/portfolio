@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
+    "@neondatabase/serverless": "^1.2.0",
     "@next/mdx": "^16.0.10",
     "@once-ui-system/core": "latest",
     "classnames": "^2.5.1",

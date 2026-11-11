@@ -12,6 +12,8 @@ import {
   HiOutlineDocument,
   HiOutlineGlobeAsiaAustralia,
   HiOutlineRocketLaunch,
+  HiOutlineLockClosed,
+  HiOutlineCog6Tooth,
 } from "react-icons/hi2";
 
 import {
@@ -64,6 +66,8 @@ export const iconLibrary: Record<string, IconType> = {
   reddit: FaReddit,
   telegram: FaTelegram,
   instagram: FaInstagram,
+  lock: HiOutlineLockClosed,
+  gear: HiOutlineCog6Tooth,
 };
 
 export type IconLibrary = typeof iconLibrary;

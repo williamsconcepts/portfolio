@@ -33,7 +33,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
           return routes[pathname as keyof typeof routes];
         }
 
-        const dynamicRoutes = ["/blog", "/work"] as const;
+        const dynamicRoutes = ["/blog", "/work", "/admin"] as const;
         for (const route of dynamicRoutes) {
           if (pathname?.startsWith(route) && routes[route]) {
             return true;
@@ -46,7 +46,15 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       const routeEnabled = checkRouteEnabled();
       setIsRouteEnabled(routeEnabled);
 
-      if (protectedRoutes[pathname as keyof typeof protectedRoutes]) {
+      const isProtected =
+        protectedRoutes[pathname as keyof typeof protectedRoutes] ||
+        Object.keys(protectedRoutes).some(
+          (protectedPath) =>
+            protectedRoutes[protectedPath as keyof typeof protectedRoutes] &&
+            pathname?.startsWith(protectedPath),
+        );
+
+      if (isProtected) {
         setIsPasswordRequired(true);
 
         const response = await fetch("/api/check-auth");
@@ -61,18 +69,24 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     performChecks();
   }, [pathname]);
 
-  const handlePasswordSubmit = async () => {
-    const response = await fetch("/api/authenticate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
+  const handlePasswordSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    try {
+      const response = await fetch("/api/authenticate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
 
-    if (response.ok) {
-      setIsAuthenticated(true);
-      setError(undefined);
-    } else {
-      setError("Incorrect password");
+      if (response.ok) {
+        setIsAuthenticated(true);
+        setError(undefined);
+      } else {
+        const data = await response.json().catch(() => ({}));
+        setError(data.message || "Incorrect password");
+      }
+    } catch (err: any) {
+      setError(err?.message || "Failed to reach server");
     }
   };
 
@@ -94,12 +108,23 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
         <Heading align="center" wrap="balance">
           This page is password protected
         </Heading>
-        <Column fillWidth gap="8" horizontal="center">
+        <Column
+          as="form"
+          onSubmit={handlePasswordSubmit}
+          fillWidth
+          gap="8"
+          horizontal="center"
+        >
           <PasswordInput
             id="password"
             label="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handlePasswordSubmit();
+              }
+            }}
             errorMessage={error}
           />
           <Button onClick={handlePasswordSubmit}>Submit</Button>
